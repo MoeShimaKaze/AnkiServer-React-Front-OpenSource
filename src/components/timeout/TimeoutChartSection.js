@@ -15,16 +15,21 @@ import {
     Cell
 } from 'recharts';
 import timeoutStatsFormatter from '../utils/timeoutStatsFormatter';
+import timeoutTypeMapping from '../utils/map/timeoutTypeMapping';
 import styles from '../../assets/css/timeout/TimeoutDashboard.module.css';
+import '../../assets/css/timeout/timeoutTypeStyles.css';
 
 const { TabPane } = Tabs;
 
-// 图表颜色配置
+// 图表颜色配置 - 使用超时类型对应的颜色
 const COLORS = {
     PICKUP: '#1890ff',
     DELIVERY: '#ff4d4f',
     CONFIRMATION: '#52c41a',
     INTERVENTION: '#722ed1',
+    MAIL_ORDER: '#1890ff',
+    SHOPPING_ORDER: '#faad14',
+    PURCHASE_REQUEST: '#52c41a',
     total: '#faad14'
 };
 
@@ -38,7 +43,8 @@ const PIE_COLORS = ['#1890ff', '#ff4d4f', '#52c41a', '#722ed1', '#faad14', '#13c
 const TimeoutChartSection = ({
                                  statistics,
                                  title = '超时趋势分析',
-                                 loading = false
+                                 loading = false,
+                                 useOrderTypes = false // 新增参数，决定是否使用订单类型而非超时类型
                              }) => {
     // 选中的图表类型
     const [activeTab, setActiveTab] = useState('trend');
@@ -69,8 +75,25 @@ const TimeoutChartSection = ({
     const trendData = statistics ? timeoutStatsFormatter.formatTimeoutTrends(statistics) : [];
 
     // 格式化分布数据
-    const distributionData = statistics ?
+    let distributionData = statistics ?
         timeoutStatsFormatter.calculateTimeoutDistribution(statistics) : [];
+
+    // 如果需要使用订单类型显示
+    if (useOrderTypes && statistics && statistics.serviceStatistics) {
+        distributionData = Object.entries(statistics.serviceStatistics).map(([type, stats]) => {
+            const count = stats && typeof stats === 'object' ? (stats.timeoutCount || 0) : 0;
+            const total = Object.values(statistics.serviceStatistics).reduce((sum, s) =>
+                sum + (s && typeof s === 'object' ? (s.timeoutCount || 0) : 0), 0);
+            const percentage = total > 0 ? Math.round((count / total) * 100) : 0;
+
+            return {
+                type,
+                typeName: timeoutTypeMapping.getOrderTypeDisplay(type),
+                count,
+                percentage
+            };
+        }).filter(item => item.count > 0);
+    }
 
     // 渲染趋势图表 - 修改后的版本，增加数据验证
     const renderTrendChart = () => {
@@ -106,26 +129,26 @@ const TimeoutChartSection = ({
                     <Line
                         type="monotone"
                         dataKey="PICKUP"
-                        name="取件超时"
+                        name={timeoutTypeMapping.getTimeoutTypeDisplay("PICKUP")}
                         stroke={COLORS.PICKUP}
                         activeDot={{ r: 8 }}
                     />
                     <Line
                         type="monotone"
                         dataKey="DELIVERY"
-                        name="配送超时"
+                        name={timeoutTypeMapping.getTimeoutTypeDisplay("DELIVERY")}
                         stroke={COLORS.DELIVERY}
                     />
                     <Line
                         type="monotone"
                         dataKey="CONFIRMATION"
-                        name="确认超时"
+                        name={timeoutTypeMapping.getTimeoutTypeDisplay("CONFIRMATION")}
                         stroke={COLORS.CONFIRMATION}
                     />
                     <Line
                         type="monotone"
                         dataKey="INTERVENTION"
-                        name="介入处理"
+                        name={timeoutTypeMapping.getTimeoutTypeDisplay("INTERVENTION")}
                         stroke={COLORS.INTERVENTION}
                     />
                     <Line
@@ -140,7 +163,7 @@ const TimeoutChartSection = ({
         );
     };
 
-    // 渲染分布图表 - 修改后的版本，增加数据验证
+    // 渲染分布图表 - 修改后的版本，增加数据验证和类型映射
     const renderDistributionChart = () => {
         if (!distributionData || distributionData.length === 0) {
             return <Empty description="暂无分布数据" />;
@@ -171,9 +194,11 @@ const TimeoutChartSection = ({
                         nameKey="typeName"
                         label={({ typeName, percentage }) => `${typeName}: ${percentage}%`}
                     >
-                        {validDistributionData.map((entry, index) => (
-                            <Cell key={`cell-${index}`} fill={PIE_COLORS[index % PIE_COLORS.length]} />
-                        ))}
+                        {validDistributionData.map((entry, index) => {
+                            // 尝试使用类型特定的颜色
+                            const color = COLORS[entry.type] || PIE_COLORS[index % PIE_COLORS.length];
+                            return <Cell key={`cell-${index}`} fill={color} />;
+                        })}
                     </Pie>
                     <Tooltip
                         formatter={(value, name, props) => {
@@ -190,6 +215,9 @@ const TimeoutChartSection = ({
         );
     };
 
+    // 决定使用的分布标题
+    const distributionTitle = useOrderTypes ? "订单类型分布" : "超时类型分布";
+
     return (
         <Card
             title={title}
@@ -205,7 +233,7 @@ const TimeoutChartSection = ({
                         renderTrendChart()
                     )}
                 </TabPane>
-                <TabPane tab="类型分布" key="distribution">
+                <TabPane tab={distributionTitle} key="distribution">
                     {loading ? (
                         <div className={styles.loadingContainer}>
                             <Spin size="large" tip="加载中..." />

@@ -1,0 +1,156 @@
+/* src/assets/css/timeout/timeoutTypeStyles.css */
+
+/* 订单类型样式 */
+.mail-order-style {
+    background-color: #e6f7ff;
+    border-left: 3px solid #1890ff;
+}
+
+.shopping-order-style {
+    background-color: #fff7e6;
+    border-left: 3px solid #faad14;
+}
+
+.purchase-request-style {
+    background-color: #f6ffed;
+    border-left: 3px solid #52c41a;
+}
+
+.default-order-style {
+    background-color: #f9f9f9;
+    border-left: 3px solid #d9d9d9;
+}
+
+/* 超时类型样式 */
+.pickup-timeout-style {
+    color: #1890ff;
+}
+
+.delivery-timeout-style {
+    color: #ff4d4f;
+}
+
+.confirmation-timeout-style {
+    color: #52c41a;
+}
+
+.intervention-timeout-style {
+    color: #722ed1;
+}
+
+.default-timeout-style {
+    color: #595959;
+}
+
+/* 标签样式 */
+.timeout-type-tag.PICKUP {
+    background-color: #e6f7ff;
+    color: #1890ff;
+    border: 1px solid #91d5ff;
+}
+
+.timeout-type-tag.DELIVERY {
+    background-color: #fff1f0;
+    color: #ff4d4f;
+    border: 1px solid #ffa39e;
+}
+
+.timeout-type-tag.CONFIRMATION {
+    background-color: #f6ffed;
+    color: #52c41a;
+    border: 1px solid #b7eb8f;
+}
+
+.timeout-type-tag.INTERVENTION {
+    background-color: #f9f0ff;
+    color: #722ed1;
+    border: 1px solid #d3adf7;
+}
+
+.order-type-tag.MAIL_ORDER {
+    background-color: #e6f7ff;
+    color: #1890ff;
+    border: 1px solid #91d5ff;
+}
+
+.order-type-tag.SHOPPING_ORDER {
+    background-color: #fff7e6;
+    color: #faad14;
+    border: 1px solid #ffe58f;
+}
+
+.order-type-tag.PURCHASE_REQUEST {
+    background-color: #f6ffed;
+    color: #52c41a;
+    border: 1px solid #b7eb8f;
+}
+
+/* 共用样式 */
+.timeout-type-tag,
+.order-type-tag {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    margin-right: 8px;
+}
+
+/* 统计卡片中的图标样式 */
+.timeout-icon.PICKUP {
+    color: #1890ff;
+}
+
+.timeout-icon.DELIVERY {
+    color: #ff4d4f;
+}
+
+.timeout-icon.CONFIRMATION {
+    color: #52c41a;
+}
+
+.timeout-icon.INTERVENTION {
+    color: #722ed1;
+}
+
+/* 统计卡片背景色 */
+.timeout-card.MAIL_ORDER {
+    background-color: rgba(24, 144, 255, 0.05);
+}
+
+.timeout-card.SHOPPING_ORDER {
+    background-color: rgba(250, 173, 20, 0.05);
+}
+
+.timeout-card.PURCHASE_REQUEST {
+    background-color: rgba(82, 196, 26, 0.05);
+}
+
+/* 统计表格行样式 */
+.timeout-table-row.MAIL_ORDER {
+    background-color: rgba(24, 144, 255, 0.05);
+}
+
+.timeout-table-row.SHOPPING_ORDER {
+    background-color: rgba(250, 173, 20, 0.05);
+}
+
+.timeout-table-row.PURCHASE_REQUEST {
+    background-color: rgba(82, 196, 26, 0.05);
+}
+
+/* 高亮显示样式 */
+.highlight-timeout.PICKUP {
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+.highlight-timeout.DELIVERY {
+    box-shadow: 0 0 0 2px rgba(255, 77, 79, 0.2);
+}
+
+.highlight-timeout.CONFIRMATION {
+    box-shadow: 0 0 0 2px rgba(82, 196, 26, 0.2);
+}
+
+.highlight-timeout.INTERVENTION {
+    box-shadow: 0 0 0 2px rgba(114, 46, 209, 0.2);
+}

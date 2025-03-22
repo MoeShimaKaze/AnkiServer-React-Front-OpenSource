@@ -2,7 +2,13 @@
 import React, { createContext, useContext, useEffect, useCallback, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
-import { VALID_NOTIFICATION_TYPES, SYSTEM_MESSAGE_TYPES } from '../utils/map/notificationTypeMap';
+import {
+    VALID_NOTIFICATION_TYPES,
+    SYSTEM_MESSAGE_TYPES,
+    getNotificationTypeText,
+    getNotificationRoutePath,
+    getNotificationPriority
+} from '../utils/map/notificationTypeMap';
 import axios from 'axios';
 import useConnectionStore from '../utils/stores/connections/ConnectionStore';
 
@@ -32,7 +38,7 @@ const NOTIFICATION_CONFIG = {
     INITIAL_RECONNECT_DELAY: 5000,  // 初始重连延迟（毫秒）
     PING_INTERVAL: 15000,           // 心跳间隔（毫秒）
     PING_TIMEOUT: 5000,             // 心跳响应超时时间（毫秒）
-    API_BASE_URL: 'http://127.0.0.1:8080'  // API基础地址
+    API_BASE_URL: 'http://localhost:8080'  // API基础地址
 };
 
 export const NotificationProvider = ({ children }) => {
@@ -302,7 +308,19 @@ export const NotificationProvider = ({ children }) => {
                         default:
                             // 处理业务消息
                             if (VALID_NOTIFICATION_TYPES.includes(data.type) && data.content) {
-                                setNotifications(prev => [...prev, data]);
+                                // 添加通知描述和路由信息
+                                const enrichedData = {
+                                    ...data,
+                                    typeText: getNotificationTypeText(data.type),
+                                    routePath: getNotificationRoutePath(data.type, {
+                                        ticketId: data.ticketId,
+                                        questionId: data.questionId
+                                    }),
+                                    priority: getNotificationPriority(data.type)
+                                };
+
+                                setNotifications(prev => [...prev, enrichedData]);
+
                                 if (data.type === 'NEW_MESSAGE') {
                                     fetchUnreadMessages();
                                 }

@@ -18,13 +18,16 @@ import {
   ShopOutlined,
   ShoppingCartOutlined,
   FileProtectOutlined,
-  MoreOutlined,
   EllipsisOutlined
 } from '@ant-design/icons';
 import styles from '../../assets/css/base/Navbar.module.css';
 import { useAuth } from '../context/AuthContext';
 import { useNotification } from '../context/NotificationContext';
-import { VALID_NOTIFICATION_TYPES, getNotificationTypeText } from '../utils/map/notificationTypeMap';
+import {
+  VALID_NOTIFICATION_TYPES,
+  getNotificationTypeText,
+  getNotificationRoutePath
+} from '../utils/map/notificationTypeMap';
 import Logout from './Logout';
 import defaultAvatarIcon from '../../assets/icon/user.png';
 
@@ -253,7 +256,7 @@ const Navbar = () => {
     const fetchUserInfo = async () => {
       if (isLoggedIn) {
         try {
-          const response = await fetch('http://127.0.0.1:8080/api/users/profile', {
+          const response = await fetch('http://localhost:8080/api/users/profile', {
             credentials: 'include'
           });
 
@@ -271,38 +274,23 @@ const Navbar = () => {
     fetchUserInfo();
   }, [isLoggedIn]);
 
-  // 处理通知点击 - 根据通知类型导航到不同页面
+  // 处理通知点击 - 使用映射函数导航到对应页面
   const handleNotificationClick = useCallback((notification) => {
     setShowNotifications(false);
 
-    // 根据通知类型导航到不同页面
-    switch(notification.type) {
-      case 'NEW_MESSAGE':
-        // 站内信通知 - 导航到站内信页面
-        navigate('/messages');
-        break;
-      case 'TICKET_STATUS_UPDATED':
-      case 'TICKET_REPLIED':
-        // 工单相关通知 - 如果有 ticketId，导航到工单聊天页面
-        if (notification.ticketId) {
-          navigate(`/chat/${notification.ticketId}`);
-        }
-        break;
-      case 'ORDER_STATUS_UPDATED':
-      case 'ORDER_CREATED':
-      case 'ORDER_ACCEPTED':
-        // 订单相关通知 - 导航到订单页面
-        navigate('/mailorder');
-        break;
-      case 'REVIEW_RECEIVED':
-        // 评价相关通知 - 可能需要导航到相应页面
-        // 根据实际需求补充
-        break;
-      default:
-        // 其他类型的通知，不执行特定导航操作
-        navigate('/messages');
-        console.log('未处理的通知类型:', notification.type);
+    // 如果通知对象中已包含路由路径（来自上下文的富通知对象），则直接使用
+    if (notification.routePath) {
+      navigate(notification.routePath);
+      return;
     }
+
+    // 否则，使用映射函数获取路由路径
+    const routePath = getNotificationRoutePath(notification.type, {
+      ticketId: notification.ticketId,
+      questionId: notification.questionId
+    });
+
+    navigate(routePath);
   }, [navigate]);
 
   // 渲染导航链接

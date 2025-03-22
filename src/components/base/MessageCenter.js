@@ -5,6 +5,7 @@ import styles from '../../assets/css/manager/MessageCenter.module.css';
 import Loading from "../utils/Loading";
 import { useNotification } from "../context/NotificationContext";
 import { toast } from "react-toastify";
+import { getNotificationTypeText } from "../utils/map/notificationTypeMap";
 
 const MessageCenter = () => {
   const { notifications } = useNotification();
@@ -34,7 +35,7 @@ const MessageCenter = () => {
   const fetchMessages = async (page, size) => {
     try {
       setIsLoading(true);
-      const response = await axios.get(`http://127.0.0.1:8080/messages?page=${page}&size=${size}`,
+      const response = await axios.get(`http://localhost:8080/messages?page=${page}&size=${size}`,
           { withCredentials: true }
       );
 
@@ -76,7 +77,7 @@ const MessageCenter = () => {
   const markAsRead = async (messageId) => {
     try {
       const response = await axios.post(
-          `http://127.0.0.1:8080/messages/${messageId}/read?page=${currentPage}&size=${pageSize}`,
+          `http://localhost:8080/messages/${messageId}/read?page=${currentPage}&size=${pageSize}`,
           {},
           { withCredentials: true }
       );
@@ -100,7 +101,7 @@ const MessageCenter = () => {
   const markAllAsRead = async () => {
     try {
       const response = await axios.post(
-          `http://127.0.0.1:8080/messages/read-all?page=${currentPage}&size=${pageSize}`,
+          `http://localhost:8080/messages/read-all?page=${currentPage}&size=${pageSize}`,
           {},
           { withCredentials: true }
       );
@@ -121,6 +122,11 @@ const MessageCenter = () => {
       console.error('标记所有消息为已读时出错:', error);
       toast.error('操作失败，请重试');
     }
+  };
+
+  // 获取消息类型文本
+  const getMessageTypeText = (type) => {
+    return getNotificationTypeText(type);
   };
 
   const formatDateTime = (dateTimeString) => {
@@ -174,7 +180,9 @@ const MessageCenter = () => {
                     <div key={message.id} className={`${styles.messageItem} ${!message.read ? styles.unread : ''}`}>
                       <div className={styles.messageContent}>{message.content}</div>
                       <div className={styles.messageTime}>{formatDateTime(message.createdDate)}</div>
-                      <div className={styles.messageType}>{message.type}</div>
+                      <div className={styles.messageType}>
+                        {getMessageTypeText(message.type)}
+                      </div>
                       {!message.read && (
                           <button onClick={() => markAsRead(message.id)} className={styles.markAsReadBtn}>
                             标记为已读

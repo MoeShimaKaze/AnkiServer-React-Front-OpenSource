@@ -2,6 +2,7 @@
 import React, { createContext, useContext, useState, useRef, useEffect, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from './AuthContext';
+import timeoutTypeMapping from "../utils/map/timeoutTypeMapping";
 
 // 创建超时统计WebSocket上下文
 const TimeoutWebSocketContext = createContext(null);
@@ -29,7 +30,7 @@ const CONFIG = {
 export const TimeoutWebSocketProvider = ({ children }) => {
     const { isLoggedIn, userId, isAdmin } = useAuth();
     useNavigate();
-// 保存统计数据的状态
+    // 保存统计数据的状态
     const [userStatistics, setUserStatistics] = useState(null);
     const [systemStatistics, setSystemStatistics] = useState(null);
     const [globalStatistics, setGlobalStatistics] = useState(null);
@@ -205,7 +206,7 @@ export const TimeoutWebSocketProvider = ({ children }) => {
 
             // 构建WebSocket URL
             const protocol = window.location.protocol === 'https:' ? 'wss:' : 'ws:';
-            const host = '127.0.0.1';
+            const host = 'localhost:8080';
             const wsURL = `${protocol}//${host}/ws/timeout-statistics?type=${type}`;
             console.log(`[超时统计] 连接到: ${wsURL}`);
 
@@ -260,8 +261,18 @@ export const TimeoutWebSocketProvider = ({ children }) => {
                                 // 检查关键数据结构是否存在
                                 if (safeAccess(data, 'data.timeoutCounts') === null) {
                                     console.warn(`[超时统计] 用户统计数据缺少timeoutCounts属性`);
-                                    // 确保至少有一个空的timeoutCounts对象
-                                    data.data.timeoutCounts = data.data.timeoutCounts || {};
+
+                                    // 如果存在新格式数据，使用映射关系创建兼容的timeoutCounts
+                                    if (safeAccess(data, 'data.serviceStatistics') &&
+                                        typeof safeAccess(data, 'data.serviceStatistics') === 'object') {
+
+                                        data.data.timeoutCounts = timeoutTypeMapping.extractTimeoutCounts(
+                                            safeAccess(data, 'data.serviceStatistics')
+                                        );
+                                    } else {
+                                        // 确保至少有一个空的timeoutCounts对象
+                                        data.data.timeoutCounts = {};
+                                    }
                                 }
 
                                 setUserStatistics(data.data);
@@ -272,41 +283,39 @@ export const TimeoutWebSocketProvider = ({ children }) => {
                             break;
 
                         case 'system':
-                            // 添加数据验证
-                            if (data.data && typeof data.data === 'object') {
-                                console.log(`[超时统计] 接收到系统统计数据，数据大小:`,
-                                    JSON.stringify(data.data).length);
-
-                                // 检查关键数据结构是否存在
-                                if (safeAccess(data, 'data.timeoutCounts') === null) {
-                                    console.warn(`[超时统计] 系统统计数据缺少timeoutCounts属性`);
-                                    // 确保至少有一个空的timeoutCounts对象
-                                    data.data.timeoutCounts = data.data.timeoutCounts || {};
-                                }
-
-                                setSystemStatistics(data.data);
-                            } else {
-                                console.warn(`[超时统计] 接收到无效的系统统计数据类型:`,
-                                    data.data ? typeof data.data : 'null/undefined');
-                            }
-                            break;
-
                         case 'global':
                             // 添加数据验证
                             if (data.data && typeof data.data === 'object') {
-                                console.log(`[超时统计] 接收到全局统计数据，数据大小:`,
+                                console.log(`[超时统计] 接收到${type}统计数据，数据大小:`,
                                     JSON.stringify(data.data).length);
 
-                                // 检查关键数据结构是否存在
-                                if (safeAccess(data, 'data.timeoutCounts') === null) {
-                                    console.warn(`[超时统计] 全局统计数据缺少timeoutCounts属性`);
+                                // 检查是否有新结构的serviceStatistics
+                                if (data.data.serviceStatistics && typeof data.data.serviceStatistics === 'object') {
+                                    // 新结构有效，继续处理
+
+                                    // 为了兼容旧代码，创建合成的timeoutCounts
+                                    if (!data.data.timeoutCounts) {
+                                        // 使用映射关系提取超时统计数据
+                                        data.data.timeoutCounts = timeoutTypeMapping.extractTimeoutCounts(
+                                            data.data.serviceStatistics
+                                        );
+                                    }
+                                }
+                                // 旧结构检查
+                                else if (!data.data.timeoutCounts) {
+                                    console.warn(`[超时统计] ${type}统计数据缺少timeoutCounts属性`);
                                     // 确保至少有一个空的timeoutCounts对象
                                     data.data.timeoutCounts = data.data.timeoutCounts || {};
                                 }
 
-                                setGlobalStatistics(data.data);
+                                // 更新状态
+                                if (type === 'system') {
+                                    setSystemStatistics(data.data);
+                                } else {
+                                    setGlobalStatistics(data.data);
+                                }
                             } else {
-                                console.warn(`[超时统计] 接收到无效的全局统计数据类型:`,
+                                console.warn(`[超时统计] 接收到无效的${type}统计数据类型:`,
                                     data.data ? typeof data.data : 'null/undefined');
                             }
                             break;

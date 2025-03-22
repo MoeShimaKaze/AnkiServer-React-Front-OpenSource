@@ -1,4 +1,5 @@
 // src/utils/timeoutStatsFormatter.js
+import timeoutTypeMapping from './map/timeoutTypeMapping';
 
 /**
  * 超时统计数据格式化工具
@@ -12,17 +13,14 @@ const timeoutStatsFormatter = {
      * @returns {string} 友好显示名称
      */
     getTimeoutTypeDisplay: (type) => {
-        const typeMap = {
-            'PICKUP': '取件超时',
-            'DELIVERY': '配送超时',
-            'CONFIRMATION': '确认超时',
-            'INTERVENTION': '介入处理',
-            'MAIL_ORDER': '快递代拿',
-            'SHOPPING_ORDER': '商品购买',
-            'PURCHASE_REQUEST': '代购需求'
-        };
-
-        return typeMap[type] || type;
+        // 使用新的映射关系获取显示名称
+        if (timeoutTypeMapping.timeoutTypeDisplay[type]) {
+            return timeoutTypeMapping.timeoutTypeDisplay[type];
+        }
+        if (timeoutTypeMapping.orderTypeDisplay[type]) {
+            return timeoutTypeMapping.orderTypeDisplay[type];
+        }
+        return type;
     },
 
     /**
@@ -74,12 +72,12 @@ const timeoutStatsFormatter = {
 
             if (total === 0) return [];
 
-            // 构建分布数据
+            // 构建分布数据 - 使用新的映射关系转换类型
             distributionData = Object.entries(serviceStats).map(([serviceType, stats]) => {
                 const count = stats && typeof stats === 'object' ? (stats.timeoutCount || 0) : 0;
                 return {
                     type: serviceType,
-                    typeName: timeoutStatsFormatter.getTimeoutTypeDisplay(serviceType),
+                    typeName: timeoutTypeMapping.getOrderTypeDisplay(serviceType),
                     count: count,
                     percentage: Math.round((count / total) * 100)
                 };
@@ -222,23 +220,19 @@ const timeoutStatsFormatter = {
 
         // 检查是否存在serviceStatistics
         if (statistics.serviceStatistics && typeof statistics.serviceStatistics === 'object') {
-            // 遍历所有服务类型
-            Object.entries(statistics.serviceStatistics).forEach(([serviceType, stats]) => {
-                // 累加总超时次数
-                if (stats && typeof stats === 'object') {
-                    const timeoutCount = stats.timeoutCount || 0;
-                    totalTimeouts += timeoutCount;
-                    totalOrders += stats.orderCount || 0;
+            // 使用映射关系提取超时数据
+            const timeoutCounts = timeoutTypeMapping.extractTimeoutCounts(statistics.serviceStatistics);
+            pickupTimeouts = timeoutCounts.PICKUP || 0;
+            deliveryTimeouts = timeoutCounts.DELIVERY || 0;
+            confirmationTimeouts = timeoutCounts.CONFIRMATION || 0;
 
-                    // 由于后端没有提供按超时类型的细分，我们根据服务类型进行简单分类
-                    // 这里可以根据实际业务逻辑调整
-                    if (serviceType === 'MAIL_ORDER') {
-                        pickupTimeouts += timeoutCount;
-                    } else if (serviceType === 'SHOPPING_ORDER') {
-                        deliveryTimeouts += timeoutCount;
-                    } else {
-                        confirmationTimeouts += timeoutCount;
-                    }
+            // 累加总超时次数
+            totalTimeouts = pickupTimeouts + deliveryTimeouts + confirmationTimeouts + (timeoutCounts.INTERVENTION || 0);
+
+            // 累加总订单数
+            Object.values(statistics.serviceStatistics).forEach(stats => {
+                if (stats && typeof stats === 'object') {
+                    totalOrders += stats.orderCount || 0;
                 }
             });
         } else if (statistics.timeoutCounts) {
@@ -271,19 +265,11 @@ const timeoutStatsFormatter = {
             let prevConfirmationTimeouts = 0;
 
             if (previousStatistics.serviceStatistics && typeof previousStatistics.serviceStatistics === 'object') {
-                // 从新的数据结构中提取
-                Object.entries(previousStatistics.serviceStatistics).forEach(([serviceType, stats]) => {
-                    if (stats && typeof stats === 'object') {
-                        const timeoutCount = stats.timeoutCount || 0;
-                        if (serviceType === 'MAIL_ORDER') {
-                            prevPickupTimeouts += timeoutCount;
-                        } else if (serviceType === 'SHOPPING_ORDER') {
-                            prevDeliveryTimeouts += timeoutCount;
-                        } else {
-                            prevConfirmationTimeouts += timeoutCount;
-                        }
-                    }
-                });
+                // 从新的数据结构中提取 - 使用映射关系
+                const prevTimeoutCounts = timeoutTypeMapping.extractTimeoutCounts(previousStatistics.serviceStatistics);
+                prevPickupTimeouts = prevTimeoutCounts.PICKUP || 0;
+                prevDeliveryTimeouts = prevTimeoutCounts.DELIVERY || 0;
+                prevConfirmationTimeouts = prevTimeoutCounts.CONFIRMATION || 0;
             } else if (previousStatistics.timeoutCounts) {
                 // 从旧的数据结构中提取
                 const prevTimeoutCounts = previousStatistics.timeoutCounts || {};
@@ -419,7 +405,7 @@ const timeoutStatsFormatter = {
             };
         }
 
-        // 适配新的数据结构，trends可能直接是趋势数组
+        // 适配不同的数据结构，trends可能直接是趋势数组
         // 或者是包含trends属性的对象
         const trendData = Array.isArray(trends) ? trends : (trends.trends || []);
 
@@ -484,6 +470,8 @@ const timeoutStatsFormatter = {
                 orderCount,
                 timeoutCount,
                 riskScore: calculateRiskScore(data),
+                // 添加显示名称
+                serviceTypeName: timeoutTypeMapping.getOrderTypeDisplay(type)
             };
         }).sort((a, b) => b.riskScore - a.riskScore); // 按风险分数降序排序
     },
@@ -528,6 +516,7 @@ const timeoutStatsFormatter = {
 
             return {
                 serviceType: type,
+                serviceTypeName: timeoutTypeMapping.getOrderTypeDisplay(type), // 添加显示名称
                 timeoutCount,
                 timeoutFees,
                 averageFee,

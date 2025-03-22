@@ -26,6 +26,8 @@ import TimeoutChartSection from './TimeoutChartSection';
 import { useTimeoutStatistics } from '../context/TimeoutWebSocketContext';
 import timeoutStatsFormatter from '../utils/timeoutStatsFormatter';
 import timeoutStatisticsApi from '../utils/api/timeoutStatisticsApi';
+import timeoutTypeMapping from '../utils/map/timeoutTypeMapping';
+import TimeoutTypeTag, { OrderTypeTag } from './TimeoutTypeTag';
 import styles from '../../assets/css/timeout/TimeoutDashboard.module.css';
 
 const { TabPane } = Tabs;
@@ -811,6 +813,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
     }, [activeStatType, connectionStatus, systemStatistics, globalStatistics, dataError, refreshData]);
 
     // 渲染统计卡片
+    // 渲染统计卡片函数修改
     const renderStatisticsCards = useCallback(() => {
         const isDataLoading = isLoading || refreshing ||
             (connectionStatus[activeStatType] === 'connected' && !summary);
@@ -848,6 +851,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                     color="#1890ff"
                     loading={isLoading || refreshing}
                     tooltip="未在规定时间内取件的次数"
+                    type="PICKUP" // 添加类型信息
                 />
 
                 <TimeoutStatisticsCard
@@ -858,6 +862,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                     color="#ff4d4f"
                     loading={isLoading || refreshing}
                     tooltip="未在规定时间内送达的次数"
+                    type="DELIVERY" // 添加类型信息
                 />
 
                 <TimeoutStatisticsCard
@@ -873,7 +878,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
         );
     }, [summary, previousStats, isLoading, refreshing, connectionStatus, activeStatType, safeAccess]);
 
-    // 用户排行榜表格列配置
+    // 用户排行榜表格列配置修改
     const userRankingsColumns = [
         {
             title: '排名',
@@ -892,16 +897,22 @@ const AdminStatsView = ({ initialData, activeModule }) => {
             key: 'username'
         },
         {
-            title: '取件超时',
+            title: timeoutTypeMapping.getTimeoutTypeDisplay('PICKUP'),
             dataIndex: 'pickupTimeouts',
             key: 'pickupTimeouts',
-            sorter: true
+            sorter: true,
+            render: (text) => (
+                <span className="timeout-type-tag PICKUP">{text}</span>
+            )
         },
         {
-            title: '配送超时',
+            title: timeoutTypeMapping.getTimeoutTypeDisplay('DELIVERY'),
             dataIndex: 'deliveryTimeouts',
             key: 'deliveryTimeouts',
-            sorter: true
+            sorter: true,
+            render: (text) => (
+                <span className="timeout-type-tag DELIVERY">{text}</span>
+            )
         },
         {
             title: '总超时次数',
@@ -938,6 +949,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
             }
         }
     ];
+
 
     // 渲染用户统计搜索结果
     const renderUserStatsResult = useCallback(() => {
@@ -1705,7 +1717,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
         );
     }, [trendAlertsData, trendAlertsLoading, safeAccess]);
 
-    // 渲染服务风险分析数据
+    // 渲染服务风险分析数据函数修改
     const renderServiceRiskData = useCallback(() => {
         if (serviceRiskLoading) {
             return <Skeleton active paragraph={{ rows: 6 }} />;
@@ -1732,9 +1744,9 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                         <Card
                             title={
                                 <span>
-                                    <WarningOutlined style={{ color: '#ff4d4f', marginRight: 8 }} />
-                                    服务类型风险分析
-                                </span>
+                                <WarningOutlined style={{ color: '#ff4d4f', marginRight: 8 }} />
+                                服务类型风险分析
+                            </span>
                             }
                             className={styles.serviceRiskAnalysisCard}
                         >
@@ -1754,14 +1766,18 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                                         <Card
                                             title={
                                                 <span>
-                                                    {serviceType}
+                                                <OrderTypeTag
+                                                    type={serviceType}
+                                                    showTooltip={true}
+                                                    tooltipText={`${timeoutTypeMapping.getOrderTypeDisplay(serviceType)}超时统计`}
+                                                />
                                                     {safeAccess(riskInfo, 'hasHighTimeoutRate', false) &&
                                                         <Tag color="red" style={{ marginLeft: 8 }}>高风险</Tag>
                                                     }
-                                                </span>
+                                            </span>
                                             }
                                             size="small"
-                                            className={styles.serviceTypeRiskCard}
+                                            className={`${styles.serviceTypeRiskCard} ${timeoutTypeMapping.getOrderTypeStyleClass(serviceType)}`}
                                         >
                                             <Statistic
                                                 title="超时率"
@@ -1802,6 +1818,15 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                                                 status={safeAccess(riskInfo, 'hasHighTimeoutRate', false) ? "exception" : "active"}
                                                 style={{ marginTop: 16 }}
                                             />
+
+                                            {/* 添加主要超时类型指示 */}
+                                            <div style={{ marginTop: 16 }}>
+                                                <span>主要超时类型: </span>
+                                                <TimeoutTypeTag
+                                                    type={timeoutTypeMapping.getTimeoutTypeByOrderType(serviceType)}
+                                                    showTooltip={true}
+                                                />
+                                            </div>
                                         </Card>
                                     </Col>
                                 ))}
@@ -1862,9 +1887,9 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                 </Card>
             </div>
         );
-    }, [serviceRiskData, serviceRiskLoading, safeAccess]);
+    }, [serviceRiskData, serviceRiskLoading, safeAccess, styles]);
 
-    // 渲染成本分析数据
+    // 渲染成本分析数据函数修改
     const renderCostAnalysisData = useCallback(() => {
         if (costAnalysisLoading) {
             return <Skeleton active paragraph={{ rows: 6 }} />;
@@ -1891,9 +1916,9 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                         <Card
                             title={
                                 <span>
-                                    <DollarOutlined style={{ color: '#722ed1', marginRight: 8 }} />
-                                    超时成本总览
-                                </span>
+                                <DollarOutlined style={{ color: '#722ed1', marginRight: 8 }} />
+                                超时成本总览
+                            </span>
                             }
                             className={styles.costOverviewCard}
                         >
@@ -1910,9 +1935,9 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                                 <Row gutter={[16, 16]}>
                                     {Object.entries(averageTimeoutFees).map(([serviceType, avgFee]) => (
                                         <Col xs={24} sm={12} key={serviceType}>
-                                            <Card size="small">
+                                            <Card size="small" className={timeoutTypeMapping.getOrderTypeStyleClass(serviceType)}>
                                                 <Statistic
-                                                    title={serviceType}
+                                                    title={timeoutTypeMapping.getOrderTypeDisplay(serviceType)}
                                                     value={avgFee}
                                                     precision={2}
                                                     valueStyle={{ fontSize: 16 }}
@@ -1930,15 +1955,16 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                         <Card
                             title={
                                 <span>
-                                    <AreaChartOutlined style={{ color: '#1890ff', marginRight: 8 }} />
-                                    服务类型成本分析
-                                </span>
+                                <AreaChartOutlined style={{ color: '#1890ff', marginRight: 8 }} />
+                                服务类型成本分析
+                            </span>
                             }
                             className={styles.serviceBreakdownCard}
                         >
                             <Table
                                 dataSource={Object.entries(serviceBreakdown).map(([type, data]) => ({
                                     type,
+                                    typeName: timeoutTypeMapping.getOrderTypeDisplay(type),
                                     timeoutCount: safeAccess(data, 'timeoutCount', 0),
                                     timeoutFees: safeAccess(data, 'timeoutFees', 0),
                                     averageFee: safeAccess(data, 'averageFee', 0)
@@ -1946,8 +1972,11 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                                 columns={[
                                     {
                                         title: '服务类型',
-                                        dataIndex: 'type',
-                                        key: 'type'
+                                        dataIndex: 'typeName',
+                                        key: 'typeName',
+                                        render: (text, record) => (
+                                            <OrderTypeTag type={record.type} />
+                                        )
                                     },
                                     {
                                         title: '超时次数',
@@ -1972,6 +2001,8 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                                 ]}
                                 size="small"
                                 pagination={false}
+                                // 添加行样式以区分不同类型
+                                rowClassName={record => `timeout-table-row ${record.type}`}
                             />
                         </Card>
                     </Col>
@@ -1989,22 +2020,22 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                                 {serviceBreakdown && Object.entries(serviceBreakdown).length > 0 ? (
                                     <>
                                         <li>
-                                            最高成本服务类型为 {
-                                            (() => {
+                                            最高成本服务类型为 <OrderTypeTag
+                                            type={(() => {
                                                 const sortedServices = Object.entries(serviceBreakdown)
                                                     .sort((a, b) => safeAccess(b[1], 'timeoutFees', 0) - safeAccess(a[1], 'timeoutFees', 0));
                                                 return sortedServices.length > 0 ? sortedServices[0][0] : '未知';
-                                            })()
-                                        }，建议重点优化该类服务的配送效率。
+                                            })()}
+                                        />，建议重点优化该类服务的配送效率。
                                         </li>
                                         <li>
-                                            平均费用最高的服务类型为 {
-                                            (() => {
+                                            平均费用最高的服务类型为 <OrderTypeTag
+                                            type={(() => {
                                                 const sortedServices = Object.entries(serviceBreakdown)
                                                     .sort((a, b) => safeAccess(b[1], 'averageFee', 0) - safeAccess(a[1], 'averageFee', 0));
                                                 return sortedServices.length > 0 ? sortedServices[0][0] : '未知';
-                                            })()
-                                        }，建议分析该类服务的超时原因。
+                                            })()}
+                                        />，建议分析该类服务的超时原因。
                                         </li>
                                     </>
                                 ) : (
@@ -2019,7 +2050,7 @@ const AdminStatsView = ({ initialData, activeModule }) => {
                 </Card>
             </div>
         );
-    }, [costAnalysisData, costAnalysisLoading, safeAccess]);
+    }, [costAnalysisData, costAnalysisLoading, safeAccess, styles]);
 
     // 渲染高风险用户数据
     const renderHighRiskUsersData = useCallback(() => {

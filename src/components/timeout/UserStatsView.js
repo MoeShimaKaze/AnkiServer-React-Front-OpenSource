@@ -25,7 +25,7 @@ import {
     ExclamationCircleOutlined,
     CheckCircleOutlined,
     InfoCircleOutlined,
-    BulbOutlined
+    BulbOutlined, CheckOutlined
 } from '@ant-design/icons';
 import PeriodSelector from './PeriodSelector';
 import TimeoutStatisticsCard from './TimeoutStatisticsCard';
@@ -33,6 +33,8 @@ import TimeoutChartSection from './TimeoutChartSection';
 import { useTimeoutStatistics } from '../context/TimeoutWebSocketContext';
 import timeoutStatsFormatter from '../utils/timeoutStatsFormatter';
 import timeoutStatisticsApi from '../utils/api/timeoutStatisticsApi';
+import timeoutTypeMapping from '../utils/map/timeoutTypeMapping';
+import { OrderTypeTag, TimeoutTypeTags } from './TimeoutTypeTag';
 import styles from '../../assets/css/timeout/TimeoutDashboard.module.css';
 const { Title, Paragraph, Text } = Typography;
 
@@ -473,6 +475,7 @@ const UserStatsView = ({activeModule }) => {
     }, [connectionStatus.user, refreshData]);
 
     // 渲染统计卡片
+    // 渲染统计卡片的函数部分修改
     const renderStatisticsCards = useCallback(() => {
         if (!summary) {
             return (
@@ -510,6 +513,7 @@ const UserStatsView = ({activeModule }) => {
                         color="#1890ff"
                         loading={isLoading}
                         tooltip="未在规定时间内取件的次数"
+                        type="PICKUP" // 添加类型信息
                     />
                 </Col>
 
@@ -522,6 +526,7 @@ const UserStatsView = ({activeModule }) => {
                         color="#ff4d4f"
                         loading={isLoading}
                         tooltip="未在规定时间内送达的次数"
+                        type="DELIVERY" // 添加类型信息
                     />
                 </Col>
 
@@ -534,6 +539,7 @@ const UserStatsView = ({activeModule }) => {
                         color="#52c41a"
                         loading={isLoading}
                         tooltip="超时订单占总订单的比例"
+                        type="CONFIRMATION" // 添加类型信息
                     />
                 </Col>
             </Row>
@@ -634,11 +640,13 @@ const UserStatsView = ({activeModule }) => {
         );
     }, [selectedOrderType, orderTypeDetails, orderTypeDetailsLoading]);
 
-    // 渲染订单类型选择器
+    // 渲染订单类型选择器函数修改
     const renderOrderTypeSelector = useCallback(() => {
-        // 根据用户统计中可能存在的服务统计获取订单类型
-        const orderTypes = userStatistics && userStatistics.serviceStatistics ?
-            Object.keys(userStatistics.serviceStatistics) : [];
+        // 使用映射获取所有订单类型
+        const orderTypes = timeoutTypeMapping.getAllOrderTypes().filter(type =>
+            userStatistics && userStatistics.serviceStatistics &&
+            userStatistics.serviceStatistics[type]
+        );
 
         if (orderTypes.length === 0) {
             return (
@@ -654,22 +662,31 @@ const UserStatsView = ({activeModule }) => {
             <div className={styles.orderTypeSelector}>
                 <h4>选择订单类型</h4>
                 <div className={styles.orderTypeButtons}>
-                    {orderTypes.map(type => (
-                        <Button
-                            key={type}
-                            type={selectedOrderType === type ? 'primary' : 'default'}
-                            onClick={() => handleOrderTypeSelect(type)}
-                            style={{ margin: '0 8px 8px 0' }}
-                        >
-                            {type}
-                        </Button>
-                    ))}
+                    {orderTypes.map(type => {
+                        // 获取该订单类型的超时次数
+                        const timeoutCount = userStatistics?.serviceStatistics?.[type]?.statistics?.timeoutCount || 0;
+
+                        return (
+                            <Button
+                                key={type}
+                                type={selectedOrderType === type ? 'primary' : 'default'}
+                                onClick={() => handleOrderTypeSelect(type)}
+                                style={{ margin: '0 8px 8px 0' }}
+                                icon={selectedOrderType === type ? <CheckOutlined /> : null}
+                                className={selectedOrderType === type ? timeoutTypeMapping.getOrderTypeStyleClass(type) : ''}
+                            >
+                                {timeoutTypeMapping.getOrderTypeDisplay(type)}
+                                {timeoutCount > 0 && <Badge count={timeoutCount} style={{ marginLeft: 8 }} />}
+                            </Button>
+                        );
+                    })}
                 </div>
             </div>
         );
     }, [userStatistics, selectedOrderType, handleOrderTypeSelect]);
 
     // 新增 - 渲染风险评估数据
+    // 在渲染风险评估数据的函数中使用类型标签
     const renderRiskAssessmentData = useCallback(() => {
         if (riskAssessmentLoading) {
             return <Skeleton active paragraph={{ rows: 6 }} />;
@@ -694,9 +711,9 @@ const UserStatsView = ({activeModule }) => {
                         <Card
                             title={
                                 <span>
-                                    <SafetyOutlined style={{ color: isHighRisk ? '#ff4d4f' : '#52c41a', marginRight: 8 }} />
-                                    个人风险评估
-                                </span>
+                                <SafetyOutlined style={{ color: isHighRisk ? '#ff4d4f' : '#52c41a', marginRight: 8 }} />
+                                个人风险评估
+                            </span>
                             }
                             className={styles.riskStatusCard}
                         >
@@ -713,10 +730,10 @@ const UserStatsView = ({activeModule }) => {
                                 <div className={styles.riskIndicators}>
                                     <div className={styles.riskIndicator}>
                                         <Tooltip title="超时率超过15%被视为高风险">
-                                            <span className={styles.indicatorLabel}>
-                                                <InfoCircleOutlined style={{ marginRight: 4 }} />
-                                                超时率:
-                                            </span>
+                                        <span className={styles.indicatorLabel}>
+                                            <InfoCircleOutlined style={{ marginRight: 4 }} />
+                                            超时率:
+                                        </span>
                                             <Progress
                                                 percent={overallTimeoutRate.toFixed(1)}
                                                 size="small"
@@ -730,6 +747,25 @@ const UserStatsView = ({activeModule }) => {
                                         <span className={styles.indicatorLabel}>超时总次数:</span>
                                         <span className={styles.indicatorValue}>{timeoutCount}</span>
                                     </div>
+
+                                    {/* 添加订单类型分布标签 */}
+                                    {serviceRisks && Object.keys(serviceRisks).length > 0 && (
+                                        <div className={styles.orderTypeDistribution} style={{ marginTop: 16 }}>
+                                            <span className={styles.indicatorLabel}>订单类型分布:</span>
+                                            <div style={{ marginTop: 8 }}>
+                                                <TimeoutTypeTags
+                                                    types={Object.keys(serviceRisks)}
+                                                    isOrderTypes={true}
+                                                    counts={Object.fromEntries(
+                                                        Object.entries(serviceRisks).map(
+                                                            ([type, data]) => [type, data.timeoutCount || 0]
+                                                        )
+                                                    )}
+                                                    onTagClick={handleOrderTypeSelect}
+                                                />
+                                            </div>
+                                        </div>
+                                    )}
                                 </div>
 
                                 {isHighRisk ? (
@@ -757,9 +793,9 @@ const UserStatsView = ({activeModule }) => {
                         <Card
                             title={
                                 <span>
-                                    <WarningOutlined style={{ color: '#faad14', marginRight: 8 }} />
-                                    服务类型风险
-                                </span>
+                                <WarningOutlined style={{ color: '#faad14', marginRight: 8 }} />
+                                服务类型风险
+                            </span>
                             }
                             className={styles.serviceRiskCard}
                         >
@@ -770,7 +806,11 @@ const UserStatsView = ({activeModule }) => {
                                         <List.Item.Meta
                                             title={
                                                 <div>
-                                                    <span>{serviceType}</span>
+                                                    <OrderTypeTag
+                                                        type={serviceType}
+                                                        showCount={true}
+                                                        count={riskInfo.timeoutCount || 0}
+                                                    />
                                                     <Tag
                                                         color={
                                                             riskInfo.riskLevel === 'CRITICAL' ? 'red' :
@@ -790,9 +830,13 @@ const UserStatsView = ({activeModule }) => {
                                                     )}
                                                 </div>
                                             }
-                                            description={riskInfo.needsIntervention ?
-                                                "该服务类型需要重点关注，建议及时改进" :
-                                                "该服务类型风险在可控范围内"
+                                            description={
+                                                <>
+                                                    <p>超时率: {((riskInfo.timeoutRate || 0) * 100).toFixed(1)}%</p>
+                                                    <p>{riskInfo.needsIntervention ?
+                                                        "该服务类型需要重点关注，建议及时改进" :
+                                                        "该服务类型风险在可控范围内"}</p>
+                                                </>
                                             }
                                         />
                                         <div>
@@ -838,7 +882,7 @@ const UserStatsView = ({activeModule }) => {
                             <Title level={5}>订单类型特别建议</Title>
                             {Object.entries(serviceRisks || {}).map(([serviceType, riskInfo]) => (
                                 <div key={serviceType} style={{ marginBottom: 16 }}>
-                                    <Text strong>{serviceType}: </Text>
+                                    <Text strong>{timeoutTypeMapping.getOrderTypeDisplay(serviceType)}: </Text>
                                     <Text>
                                         {riskInfo.recommendedAction ||
                                             (riskInfo.riskLevel === 'CRITICAL' || riskInfo.riskLevel === 'HIGH' ?
@@ -852,7 +896,7 @@ const UserStatsView = ({activeModule }) => {
                 </Card>
             </div>
         );
-    }, [riskAssessmentData, riskAssessmentLoading, setSelectedOrderType, setActiveTab]);
+    }, [riskAssessmentData, riskAssessmentLoading, setSelectedOrderType, setActiveTab, handleOrderTypeSelect]);
 
     // Tab定义
     const tabItems = [
