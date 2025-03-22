@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styles from '../../assets/css/mail/MailOrder.module.css';
 import { orderStatusMap, deliveryServiceMap } from '../utils/map/orderStatusMap';
 import MapModal from '../utils/amap/MapModal';
+import { fetchUsernamesByUserIds } from '../utils/api/Usernames';
 
 // 引入Ant Design组件
 import {
@@ -64,6 +65,7 @@ const AdminOrderManagement = () => {
     }, 3000);
   }, []);
 
+  // 修改fetchUsernames函数
   const fetchUsernames = useCallback(async (ordersData) => {
     const userIds = new Set();
     ordersData.forEach(order => {
@@ -71,20 +73,11 @@ const AdminOrderManagement = () => {
       if (order.assignedUserId) userIds.add(order.assignedUserId);
     });
 
-    const usernamesData = {};
+    if (userIds.size === 0) return;
+
     try {
-      await Promise.all(Array.from(userIds).map(async (userId) => {
-        try {
-          const response = await axios.get(
-              `http://127.0.0.1:8080/api/users/${userId}`,
-              { withCredentials: true }
-          );
-          usernamesData[userId] = response.data.username;
-        } catch (error) {
-          console.error(`获取用户 ${userId} 失败:`, error);
-          usernamesData[userId] = '未知用户';
-        }
-      }));
+      // 使用批量API获取所有用户名
+      const usernamesData = await fetchUsernamesByUserIds(Array.from(userIds));
       setUsernames(usernamesData);
     } catch (error) {
       console.error('获取用户名失败:', error);
@@ -97,7 +90,7 @@ const AdminOrderManagement = () => {
     try {
       setIsLoading(true);
       // 修改API调用，增加分页参数
-      const response = await axios.get('http://127.0.0.1:8080/api/mail-orders/all', {
+      const response = await axios.get('https://data.foreactos.fun/api/mail-orders/all', {
         params: {
           page: pageNum,
           size: size,
@@ -248,7 +241,7 @@ const AdminOrderManagement = () => {
         orderNumber,
         '确定要手动处理此退款吗？如果不手动处理，系统将在30分钟后自动处理。',
         '退款处理成功！',
-        'http://127.0.0.1:8080/api/mail-orders/process-refund'
+        'https://data.foreactos.fun/api/mail-orders/process-refund'
     );
   }, [performAction]);
 
@@ -258,7 +251,7 @@ const AdminOrderManagement = () => {
         orderNumber,
         null,
         '已成功介入订单！',
-        'http://127.0.0.1:8080/api/mail-orders/intervene'
+        'https://data.foreactos.fun/api/mail-orders/intervene'
     );
   }, [performAction]);
 
@@ -268,7 +261,7 @@ const AdminOrderManagement = () => {
         orderNumber,
         '确定要删除此订单吗？此操作无法撤销。',
         '订单及其相关评价删除成功',
-        'http://127.0.0.1:8080/api/mail-orders',
+        'https://data.foreactos.fun/api/mail-orders',
         'delete'
     );
   }, [performAction]);
@@ -283,7 +276,7 @@ const AdminOrderManagement = () => {
         `${orderNumber}/rating/${ratingId}`,
         '确定要删除此评价吗？此操作无法撤销。',
         '评价已成功删除',
-        'http://127.0.0.1:8080/api/mail-orders',
+        'https://data.foreactos.fun/api/mail-orders',
         'delete'
     );
   }, [performAction, setTemporaryMessage]);
