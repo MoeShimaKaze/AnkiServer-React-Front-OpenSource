@@ -1,0 +1,430 @@
+/* Navbar.module.css */
+
+/* 导航栏基础容器 */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 64px;
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 站内信入口样式 */
+.emptyNotificationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.hiddenNotificationCount {
+  padding: 10px 16px;
+  background-color: #fff7e6;
+  color: #fa8c16;
+  font-size: 13px;
+  text-align: center;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.moreButton {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  padding: 0 15px;
+}
+
+.navLinks {
+  display: flex;
+  height: 100%;
+}
+
+.navItem {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.viewAll {
+  display: block;
+  padding: 12px;
+  text-align: center;
+  color: #1677ff;
+  font-weight: 500;
+  text-decoration: none;
+  background: #f0f0f0;
+  transition: all 0.3s ease;
+}
+
+.viewAll:hover {
+  background: #e6f7ff;
+  color: #0958d9;
+}
+
+.emptyNotification {
+  padding: 8px;
+  text-align: center;
+  color: #999;
+  margin-bottom: 12px;
+}
+
+.messageLink {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 10px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  color: #1677ff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 14px;
+  border: 1px solid #e8e8e8;
+}
+
+.messageLink:hover {
+  background-color: #e6f7ff;
+  color: #0958d9;
+  border-color: #91caff;
+}
+
+.messageLink span {
+  line-height: 1;
+}
+
+/* 内容容器，控制最大宽度和布局 */
+.container {
+  max-width: 1400px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 16px; /* 添加内边距，增加整体空间感 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo样式 - 修改为保持在最左侧 */
+.logo {
+  display: flex;
+  align-items: center;
+  height: 40px;             /* 使用固定高度而不是百分比 */
+  width: auto;              /* 让宽度自动适应，保持原始比例 */
+  padding-left: 0; /* 移除左侧padding，因为container已经有padding了 */
+  padding-right: 0;
+  color: #1677ff;
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  margin-right: 32px; /* 显著增加右边距，为logo和导航链接创造明显分隔 */
+  flex-shrink: 0; /* 防止Logo缩小 */
+}
+
+.logo:hover {
+  color: #4096ff;
+}
+
+.logo img {                 /* 为Logo内的图片添加样式 */
+  height: 100%;
+  width: auto;
+  object-fit: contain;      /* 确保图片保持原始比例 */
+  max-width: 100%;
+}
+
+/* 导航项样式 */
+.navItem {
+  padding: 0 5px; /* 稍微增加水平padding，优化间距 */
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.navItem:hover {
+  background-color: rgba(22, 119, 255, 0.08);
+}
+
+.navItem:active {
+  background-color: rgba(22, 119, 255, 0.15);
+}
+
+/* 桌面端导航区域 */
+.desktop {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start; /* 改为从左开始排列 */
+  overflow-x: auto; /* 在必要时允许横向滚动 */
+  scrollbar-width: none; /* 隐藏滚动条（Firefox） */
+  -ms-overflow-style: none; /* 隐藏滚动条（IE和Edge） */
+  padding-left: 8px; /* 添加左侧内边距，进一步增加与logo的分隔 */
+}
+
+.desktop::-webkit-scrollbar {
+  display: none; /* 隐藏滚动条（Chrome和Safari） */
+}
+
+/* 导航链接容器 */
+.navLinks {
+  display: flex;
+  gap: 8px; /* 增加导航项之间的间距，使其更清晰 */
+  align-items: center;
+  flex-wrap: nowrap; /* 强制不换行 */
+}
+
+/* 导航链接样式 - 修改为强制横向排布 */
+.navLink {
+  display: flex;
+  align-items: center;
+  gap: 6px; /* 增加图标和文字之间的间距 */
+  color: rgba(0, 0, 0, 0.85);
+  text-decoration: none;
+  font-size: 13px; /* 保持字体大小 */
+  padding: 8px 8px; /* 增加水平padding */
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* 强制不换行 */
+  flex-direction: row; /* 强制横向排列 */
+  flex-shrink: 0; /* 防止导航项被压缩 */
+}
+
+.navLink:hover {
+  color: #1677ff;
+  background: rgba(22, 119, 255, 0.1);
+}
+
+.navLink span {
+  line-height: 1;
+}
+
+/* 用户操作区域样式 - 确保在最右侧 */
+.user {
+  display: flex;
+  align-items: center;
+  gap: 12px; /* 保持间距 */
+  margin-left: auto; /* 确保推到右侧 */
+  padding-right: 0; /* 移除右侧padding，因为container已经有padding了 */
+  flex-shrink: 0; /* 防止被压缩 */
+}
+
+/* 通知相关样式 */
+.notify {
+  position: relative;
+}
+
+.notifyBtn {
+  color: rgb(22, 119, 255);
+  padding: 8px;
+}
+
+.notifyBtn:hover {
+  color: #1677ff;
+  background: rgba(22, 119, 255, 0.1);
+}
+
+.notifyDropdown {
+  position: absolute;
+  top: 48px;
+  right: 0;
+  width: 320px;
+  background: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+.notificationItem {
+  padding: 16px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.notificationItem:hover {
+  background-color: #f0f0f0;
+}
+
+.notificationHeader {
+  color: #1677ff;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.notificationContent {
+  color: #333;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+.notificationTime {
+  color: #999;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* 用户信息样式 */
+.profile {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.85);
+  transition: opacity 0.2s ease;
+}
+
+.profile:hover {
+  opacity: 0.8;
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 14px;
+}
+
+/* 登录注册按钮区域 */
+.auth {
+  display: flex;
+  gap: 8px;
+}
+
+/* 移动端相关样式 */
+.menuBtn {
+  display: none;
+  color: rgba(0, 0, 0, 0.85);
+}
+
+/* 抽屉菜单样式 */
+.drawer :global(.ant-drawer-body) {
+  padding: 16px;
+}
+
+.drawer .navLinks {
+  flex-direction: column;
+  gap: 12px;
+}
+
+.drawer .navLink {
+  padding: 12px;
+  width: 100%;
+}
+
+/* 响应式布局 */
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 0 12px; /* 保持一些内边距 */
+  }
+
+  .menuBtn {
+    display: block;
+  }
+
+  .logo {
+    margin-right: 16px; /* 在移动端减小右边距，但仍保持一定间隔 */
+  }
+
+  .desktop {
+    display: none;
+  }
+
+  .name {
+    display: none;
+  }
+
+  .user {
+    gap: 12px;
+  }
+
+  .notifyDropdown {
+    width: calc(100vw - 32px);
+    max-width: 320px;
+    right: -16px;
+  }
+}
+
+/* 暗色主题适配 */
+@media (prefers-color-scheme: dark) {
+  .notifyDropdown {
+    background: #1f1f1f;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .notificationItem {
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .notificationItem:hover {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  .notificationContent {
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .notificationTime {
+    color: rgba(255, 255, 255, 0.45);
+  }
+
+  .viewAll {
+    background: #141414;
+    color: rgba(255, 255, 255, 0.45);
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  .viewAll:hover {
+    background: #1f1f1f;
+    color: rgba(0, 0, 0, 0.85);
+  }
+
+  .messageLink {
+    background-color: #1f1f1f;
+    border-color: #303030;
+    color: #1890ff;
+  }
+
+  .messageLink:hover {
+    background-color: #141414;
+    color: #40a9ff;
+    border-color: #177ddc;
+  }
+}
+
+/* 无障碍支持 */
+.navLink:focus-visible,
+.notifyBtn:focus-visible,
+.profile:focus-visible {
+  outline: 2px solid #1677ff;
+  outline-offset: 2px;
+}
+
+/* 动画效果 */
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.notifyDropdown {
+  animation: slideDown 0.2s ease;
+}

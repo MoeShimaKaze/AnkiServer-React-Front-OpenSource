@@ -1,0 +1,29 @@
+/* LogoutButton.module.css - 调整后适配Ant Design */
+.logoutButton {
+  background-color: #4CAF50 !important;
+  border-color: #4CAF50 !important;
+  color: white !important;
+  padding: 0 10px !important;
+  height: 32px !important;
+  text-align: center !important;
+  display: flex !important;
+  align-items: center !important;
+  font-size: 16px !important;
+  cursor: pointer !important;
+  border-radius: 8px !important;
+  transition: background-color 0.3s ease !important;
+  margin-left: 15px !important;
+  box-shadow: none !important;
+}
+
+.logoutButton:hover,
+.logoutButton:focus {
+  background-color: #dc3545 !important;
+  border-color: #dc3545 !important;
+}
+
+/* 调整Ant Design内置图标样式 */
+.logoutButton span[role="img"] {
+  font-size: 16px !important;
+  margin-right: 5px !important;
+}

@@ -1,0 +1,531 @@
+/* CreateFriendProfile.module.css */
+
+.pageContainer {
+    min-height: 100vh;
+    padding-top: 64px;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../img/background_22.png');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+.formCard {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+}
+
+.title {
+    text-align: center;
+    font-size: 24px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 32px;
+}
+
+.errorAlert {
+    margin-bottom: 24px;
+}
+
+.section {
+    margin-bottom: 32px;
+}
+
+.sectionTitle {
+    font-size: 18px;
+    font-weight: 500;
+    color: #2d3748;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+.sectionContent {
+    padding: 0 8px;
+}
+
+.locationInputs {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+}
+
+.locationInput {
+    width: 160px;
+}
+
+.hobbiesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 4px 0;
+}
+
+.hobbyTag {
+    padding: 4px 8px;
+    margin: 0;
+}
+
+.addHobbyTag {
+    background-color: #fafafa;
+    border-style: dashed;
+    cursor: pointer;
+}
+
+.addHobbyTag:hover {
+    color: #1890ff;
+    border-color: #1890ff;
+}
+
+.hobbyInput {
+    width: 120px;
+    margin-right: 8px;
+}
+
+.submitButtonContainer {
+    text-align: center;
+    margin-top: 40px;
+}
+
+.submitButton {
+    min-width: 200px;
+}
+
+/* 在 CreateFriendProfile.module.css 中添加 */
+.presetSubjects {
+    margin-top: 16px;
+    padding: 8px;
+    background-color: #fafafa;
+    border-radius: 4px;
+}
+
+.presetTag {
+    margin: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.presetTag:hover {
+    color: #1890ff;
+    border-color: #1890ff;
+}
+
+/* 表单基础样式 */
+.form {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* 折叠面板样式 */
+.formCollapse {
+    background: transparent;
+    border: none;
+    margin-bottom: 24px;
+}
+
+.formCollapse :global(.ant-collapse-item) {
+    margin-bottom: 16px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid #e8e8e8;
+    background-color: white;
+}
+
+.collapsePanel {
+    transition: all 0.3s ease;
+}
+
+.collapsePanel:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* 面板内容区域样式 */
+.panelContent {
+    padding: 16px;
+    background-color: white;
+}
+
+/* 联系方式区域样式 */
+.contactSection {
+    margin-top: 32px;
+    padding: 24px;
+    background-color: #fafafa;
+    border-radius: 8px;
+    border: 1px dashed #d9d9d9;
+    transition: all 0.3s ease;
+}
+
+.contactSection:hover {
+    background-color: #f0f5ff;
+    border-color: #91d5ff;
+}
+
+/* 联系方式图标样式 */
+.sectionIcon {
+    margin-right: 8px;
+    color: #1890ff;
+    font-size: 20px;
+    vertical-align: middle;
+    transition: all 0.3s ease;
+}
+
+/* 动画效果 */
+.contactSection:hover .sectionIcon {
+    transform: scale(1.1);
+    color: #096dd9;
+}
+
+/* 输入组样式 */
+.inputGroup {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 16px;
+    width: 100%;
+}
+
+.inputGroup :global(.ant-form-item) {
+    margin-bottom: 0;
+}
+
+/* 输入容器样式 */
+.inputContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: 100%;
+    margin-bottom: 16px;
+}
+
+/* 输入框样式 */
+.input {
+    width: 100%;
+    max-width: 300px;
+    transition: all 0.3s ease;
+}
+
+.input:focus {
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+}
+
+/* 标签容器样式 */
+.tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 8px 0;
+    min-height: 40px;
+    border-radius: 4px;
+}
+
+/* 标签样式 */
+.tag {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 8px;
+    background-color: #f5f5f5;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    font-size: 14px;
+    color: #595959;
+    transition: all 0.3s ease;
+    margin: 0;
+}
+
+.tag:hover {
+    background-color: #e6f7ff;
+    border-color: #91d5ff;
+    color: #1890ff;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+    .contentWrapper {
+        padding: 16px;
+    }
+
+    .formCard {
+        padding: 20px;
+    }
+
+    .locationInputs {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .locationInput {
+        width: 100%;
+    }
+
+    .inputContainer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .input {
+        max-width: 100%;
+    }
+
+    .inputGroup {
+        flex-direction: column;
+    }
+
+    .inputGroup > * {
+        width: 100%;
+    }
+
+    .contactSection {
+        padding: 16px;
+        margin-top: 24px;
+    }
+}
+
+/* 暗色主题支持 */
+/* 继续 CreateFriendProfile.module.css 的暗色主题部分 */
+
+:global(.ant-app-dark) {
+    .addHobbyTag:hover {
+        background-color: #1f1f1f;
+        border-color: #177ddc;
+        color: #177ddc;
+    }
+
+    .hobbyTag {
+        background-color: #262626;
+        border-color: #434343;
+        color: #e8e8e8;
+    }
+
+    .hobbyTag:hover {
+        background-color: #303030;
+    }
+
+    .hobbyInput {
+        background-color: #1f1f1f;
+        border-color: #434343;
+        color: #e8e8e8;
+    }
+
+    .locationInputs :global(.ant-input-number) {
+        background-color: #1f1f1f;
+        border-color: #434343;
+        color: #e8e8e8;
+    }
+
+    .locationInputs :global(.ant-input-number-handler-wrap) {
+        background-color: #262626;
+        border-color: #434343;
+    }
+
+    .formCollapse :global(.ant-collapse-item) {
+        background-color: #1f1f1f;
+        border-color: #303030;
+    }
+
+    .panelContent {
+        background-color: #1f1f1f;
+    }
+
+    .tag {
+        background-color: #262626;
+        border-color: #434343;
+        color: #d9d9d9;
+    }
+
+    .tag:hover {
+        background-color: #111b26;
+        border-color: #177ddc;
+        color: #177ddc;
+    }
+
+    .input {
+        background-color: #1f1f1f;
+        border-color: #434343;
+        color: #d9d9d9;
+    }
+
+    .input:focus {
+        box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    }
+
+    .contactSection {
+        background-color: #1f1f1f;
+        border-color: #434343;
+    }
+
+    .contactSection:hover {
+        background-color: #111b26;
+        border-color: #177ddc;
+    }
+
+    .sectionIcon {
+        color: #177ddc;
+    }
+
+    .contactSection:hover .sectionIcon {
+        color: #40a9ff;
+    }
+}
+
+/* 添加动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* 应用动画效果到各个元素 */
+.formCard {
+    animation: fadeIn 0.3s ease;
+}
+
+.section {
+    animation: slideIn 0.3s ease;
+}
+
+.hobbyTag {
+    animation: fadeIn 0.2s ease;
+}
+
+/* 增强交互反馈 */
+.section:hover {
+    background-color: rgba(0, 0, 0, 0.02);
+    transition: background-color 0.3s ease;
+}
+
+.formCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transition: box-shadow 0.3s ease;
+}
+
+/* 表单验证状态样式 */
+:global(.ant-form-item-has-error) .locationInput {
+    border-color: #ff4d4f;
+}
+
+:global(.ant-form-item-has-success) .locationInput {
+    border-color: #52c41a;
+}
+.panelContent {
+    animation: fadeIn 0.3s ease;
+}
+
+/* 交互状态 */
+.tag[role="button"] {
+    cursor: pointer;
+    user-select: none;
+}
+
+.tag[role="button"]:active {
+    transform: scale(0.98);
+}
+
+/* 无障碍支持 */
+.tag:focus-visible,
+.input:focus-visible {
+    outline: 2px solid #1890ff;
+    outline-offset: 2px;
+}
+
+/* 打印样式支持 */
+@media print {
+    .background {
+        display: none;
+    }
+
+    .formCard {
+        box-shadow: none;
+        border: 1px solid #d9d9d9;
+    }
+
+    .submitButtonContainer {
+        display: none;
+    }
+}
+
+/* 加载状态样式 */
+.loadingOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* 表单字段组样式 */
+.fieldGroup {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.fieldGroup > * {
+    flex: 1;
+}
+
+/* 移动端优化补充 */
+@media screen and (max-width: 480px) {
+    .fieldGroup {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .title {
+        font-size: 20px;
+        margin-bottom: 24px;
+    }
+
+    .sectionTitle {
+        font-size: 16px;
+    }
+
+    .hobbyInput {
+        width: 100%;
+    }
+
+    .submitButton {
+        width: 100%;
+    }
+}

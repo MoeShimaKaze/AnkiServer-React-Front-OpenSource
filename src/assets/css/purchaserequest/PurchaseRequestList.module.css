@@ -1,0 +1,241 @@
+/* src/assets/css/purchaserequest/PurchaseRequestList.module.css */
+
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* 新增页面容器样式 */
+.pageContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 新增内容包装器样式 */
+.contentWrapper {
+    padding: 80px 20px 20px 20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: border-radius 0.3s ease !important;
+}
+
+/* 新增背景图片样式 */
+.pageContainer::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../img/background_47.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+    transform: scale(1.02);
+    will-change: transform;
+}
+
+/* 添加推荐模式提示样式 */
+.recommendTip {
+    padding: 10px;
+    background-color: #e6f7ff;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    color: #1890ff;
+}
+
+.recommendTip svg {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* 添加模式提示样式 */
+.modeTip, .recommendTip, .searchTip {
+    padding: 10px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.modeTip {
+    background-color: #e6fffb;
+    color: #13c2c2;
+}
+
+.recommendTip {
+    background-color: #e6f7ff;
+    color: #1890ff;
+}
+
+.searchTip {
+    background-color: #f6ffed;
+    color: #52c41a;
+}
+
+.modeTip svg, .recommendTip svg, .searchTip svg {
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+/* 新增背景遮罩层 */
+.pageContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.5);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titleIcon {
+    font-size: 24px;
+    color: #1890ff;
+}
+
+.title h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.toolbar {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.modalFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.activeFilters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    align-items: center;
+}
+
+.filterTag {
+    padding: 4px 8px;
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    border-radius: 4px;
+    color: #1890ff;
+    font-size: 12px;
+}
+
+.listContent {
+    margin-top: 20px;
+}
+
+.pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.emptyContainer {
+    padding: 40px;
+    text-align: center;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 响应式设计媒体查询 */
+@media (max-width: 1024px) {
+    .container {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pageContainer::before {
+        transform: scale(1.05);
+    }
+
+    .container {
+        padding: 15px;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .toolbar {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 12px;
+    }
+}
+
+/* 性能优化 */
+@media (prefers-reduced-motion: no-preference) {
+    .pageContainer::before {
+        transition: transform 0.3s ease-out;
+    }
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}

@@ -1,0 +1,113 @@
+/* FriendSidebar.module.css */
+
+.sidebarContainer {
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    width: 240px;
+    position: sticky;
+    top: 84px; /* 顶部导航栏高度 + 间距 */
+    height: calc(100vh - 108px);
+    overflow-y: auto;
+    transition: all 0.3s ease;
+}
+
+.sidebarHeader {
+    padding: 16px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.sidebarTitle {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #2d3748;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.sidebarMenu {
+    border-right: none;
+}
+
+.sidebarMenu :global(.ant-menu-item) {
+    margin: 4px 0;
+    border-radius: 0;
+    height: 48px;
+    line-height: 48px;
+    font-size: 15px;
+}
+
+.sidebarMenu :global(.ant-menu-item-selected) {
+    background-color: #e6f7ff;
+    color: #1890ff;
+    font-weight: 500;
+    border-right: 3px solid #1890ff;
+}
+
+/* 暗色主题适配 */
+:global(.ant-app-dark) .sidebarContainer {
+    background-color: #1f1f1f;
+    border-color: #303030;
+}
+
+:global(.ant-app-dark) .sidebarHeader {
+    border-color: #303030;
+}
+
+:global(.ant-app-dark) .sidebarTitle {
+    color: #e6e6e6;
+}
+
+:global(.ant-app-dark) .sidebarMenu :global(.ant-menu-item-selected) {
+    background-color: #111b26;
+    color: #177ddc;
+    border-right-color: #177ddc;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .sidebarContainer {
+        width: 100%;
+        position: static;
+        height: auto;
+        margin-bottom: 16px;
+    }
+
+    .sidebarMenu {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+    }
+
+    .sidebarMenu::-webkit-scrollbar {
+        height: 4px;
+    }
+
+    .sidebarMenu::-webkit-scrollbar-thumb {
+        background-color: #d9d9d9;
+        border-radius: 2px;
+    }
+
+    .sidebarMenu :global(.ant-menu-item) {
+        flex: 1;
+        min-width: max-content;
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    .sidebarHeader {
+        padding: 12px;
+    }
+
+    .sidebarTitle {
+        font-size: 16px;
+    }
+
+    .sidebarMenu :global(.ant-menu-item) {
+        padding: 0 12px;
+    }
+}

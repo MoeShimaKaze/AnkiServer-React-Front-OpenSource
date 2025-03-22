@@ -1,0 +1,533 @@
+.pageContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.pageContainer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../../img/background_16.png') no-repeat center center/cover;
+    filter: blur(5px);
+    z-index: -1;
+}
+
+/* 提现历史组件样式 */
+.withdrawalHistory {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 10px;
+    padding: 20px;
+    min-height: 400px;
+}
+
+.historyHeader {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.emptyHistory {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    font-size: 16px;
+    color: #999;
+}
+
+.historyTable {
+    margin-top: 15px;
+}
+
+.expandedRow {
+    padding: 12px 20px;
+    background-color: #f9f9f9;
+}
+
+.expandedItem {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.expandedLabel {
+    font-weight: bold;
+    margin-right: 10px;
+    min-width: 80px;
+}
+
+.expandedValue {
+    flex: 1;
+}
+
+.highlightedRow {
+    background-color: #e6f7ff !important;
+}
+
+/* 按钮容器样式更新 */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* 提现按钮和提现记录按钮样式 */
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+/* 添加到现有CSS文件中 */
+.verificationReminder {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.verificationReminder :global(.ant-result-icon) {
+    margin-bottom: 24px;
+}
+
+.verificationReminder :global(.ant-result-title) {
+    font-size: 24px;
+    color: rgba(0, 0, 0, 0.85);
+    font-weight: 500;
+}
+
+.verificationReminder :global(.ant-result-subtitle) {
+    color: rgba(0, 0, 0, 0.65);
+    font-size: 16px;
+    line-height: 1.6;
+    margin: 16px 0 24px;
+}
+
+.verificationReminder :global(.ant-btn) {
+    height: 40px;
+    padding: 0 24px;
+    font-size: 16px;
+    transition: all 0.3s;
+}
+
+.contentContainer {
+    display: flex;
+    flex: 1;
+    padding: 20px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+}
+
+/* 分页控制区样式 */
+.paginationControls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 0 10px;
+}
+
+.pageSizeSelector {
+    display: flex;
+    align-items: center;
+}
+
+.pageSizeSelect {
+    margin-left: 8px;
+    padding: 5px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: white;
+}
+
+.paginationInfo {
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* 分页导航样式 */
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    padding: 10px 0;
+}
+
+.paginationButton {
+    padding: 6px 12px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.paginationButton:hover:not(:disabled) {
+    background-color: #f0f0f0;
+    border-color: #aaa;
+}
+
+.paginationButton:disabled {
+    color: #ccc;
+    cursor: not-allowed;
+}
+
+.pageNumbers {
+    display: flex;
+    margin: 0 5px;
+}
+
+.pageNumber {
+    padding: 6px 12px;
+    margin: 0 2px;
+    border: 1px solid #ddd;
+    background-color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.pageNumber:hover {
+    background-color: #f0f0f0;
+}
+
+.currentPage {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.currentPage:hover {
+    background-color: #0069d9;
+}
+
+/* 可排序表头样式 */
+.sortableHeader {
+    cursor: pointer;
+    position: relative;
+    padding-right: 15px;
+    transition: background-color 0.2s;
+}
+
+.sortableHeader:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 表格容器增强样式 */
+.tableContainer {
+    overflow-x: auto;
+    max-width: 100%;
+    margin-bottom: 15px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+.table {
+    min-width: 100%;
+    border-collapse: collapse;
+}
+
+.table th, .table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.table thead th {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #ddd;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.table tbody tr:hover {
+    background-color: rgba(0, 123, 255, 0.05);
+}
+
+.sidebar {
+    width: 200px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px 0 0 10px;
+    box-shadow: -4px 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+/* 修改 .sidebar h2 样式确保标题居中 */
+.sidebar h2 {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    width: 100%;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.sidebar li {
+    padding: 10px;
+    margin-bottom: 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar li:hover, .sidebar li.active {
+    background-color: #007bff;
+    color: white;
+}
+
+/* 确保菜单项在悬停和激活状态下的样式正确应用 */
+.sidebar :global(.ant-menu-item:hover),
+.sidebar li.active,
+.sidebar :global(.ant-menu-item-selected) {
+    background-color: #007bff;
+    color: white;
+}
+
+/* 确保图标与文本间距合适 */
+.sidebar :global(.ant-menu-item .anticon) {
+    margin-right: 8px;
+}
+
+/* 调整菜单项内边距和字体大小 */
+.sidebar :global(.ant-menu-item) {
+    padding: 0 10px;
+    font-size: 14px;
+    line-height: 40px;
+}
+
+/* 去除 Ant Design 菜单默认边框和背景 */
+.sidebar :global(.ant-menu) {
+    background: transparent;
+    border-right: none;
+}
+
+.mainContent {
+    flex: 1;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 0 10px 10px 0;
+    box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    max-height: calc(100vh - 100px);
+    backdrop-filter: blur(5px);
+}
+
+.centeredTitle {
+    text-align: center;
+    color: #0056b3;
+    margin-bottom: 20px;
+}
+
+.divider {
+    height: 1px;
+    background-color: #e0e0e0;
+    margin: 20px 0;
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.userWallet, .adminWallet, .allWallets {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.systemBalance {
+    font-size: 36px;
+    font-weight: bold;
+    color: #28a745;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+.button:hover {
+    background-color: #0056b3;
+}
+
+.tableContainer {
+    overflow-x: auto;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.table th, .table td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    color: #333;
+    font-weight: bold;
+}
+
+.table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.noWallets {
+    text-align: center;
+    color: #555;
+    margin-top: 20px;
+}
+
+.error {
+    color: #dc3545;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+.userWallet .table tr:last-child td {
+    border-bottom: none;
+}
+
+.userWallet .table td:first-child {
+    font-weight: bold;
+    background-color: #f8f9fa;
+}
+
+.userWallet .table td:last-child {
+    text-align: right;
+}
+
+@media (max-width: 768px) {
+    .contentContainer {
+        flex-direction: column;
+    }
+
+    .sidebar, .mainContent {
+        width: 100%;
+        border-radius: 10px;
+        margin-bottom: 20px;
+    }
+}
+
+.userWallet .tableContainer {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.userWallet .table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.userWallet .table th,
+.userWallet .table td {
+    padding: 15px 24px;
+    text-align: center;
+    border-right: 1px solid #e0e0e0;
+}
+
+.userWallet .table th:last-child,
+.userWallet .table td:last-child {
+    border-right: none;
+}
+
+.userWallet .table th {
+    background-color: #f8f9fa;
+    font-weight: bold;
+    color: #333;
+}
+
+.userWallet .table td {
+    font-size: 18px;
+    color: #0056b3;
+}
+
+.loadingWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* 减去导航栏高度 */
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/* 适配移动设备的响应式样式 */
+@media (max-width: 768px) {
+    .paginationControls {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .paginationInfo {
+        margin-top: 10px;
+    }
+
+    .pagination {
+        flex-wrap: wrap;
+    }
+
+    .pageNumbers {
+        order: 3;
+        margin-top: 10px;
+        width: 100%;
+        justify-content: center;
+    }
+}

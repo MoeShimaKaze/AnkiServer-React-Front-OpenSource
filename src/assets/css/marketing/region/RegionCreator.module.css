@@ -1,0 +1,118 @@
+.addButton {
+    margin-left: 8px;
+}
+
+.regionForm {
+    margin-top: 16px;
+}
+
+.mapTools {
+    margin-top: 16px;
+}
+
+.mapToolbar {
+    margin-bottom: 16px;
+    display: flex;
+    gap: 8px;
+}
+
+.drawingTip {
+    margin-bottom: 16px;
+}
+
+.drawingInfo {
+    margin-bottom: 8px;
+}
+
+.pointsInfo {
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.warningText {
+    color: #ff4d4f;
+}
+
+.mapContainer {
+    height: 400px;
+    border: 1px solid #eee;
+}
+
+/* 新增样式 */
+.searchAddressContainer {
+    margin-bottom: 16px;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+    padding: 12px;
+    background-color: #fafafa;
+}
+
+.searchAddressContainer h4 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.searchTip {
+    font-size: 13px;
+    color: #888;
+    font-weight: normal;
+    margin-left: 8px;
+}
+
+.selectedAddressInfo {
+    margin-top: 8px;
+    padding: 8px;
+    background-color: #e6f7ff;
+    border-radius: 4px;
+    color: #1890ff;
+    font-size: 14px;
+}
+
+.searchInputGroup {
+    display: flex;
+    gap: 8px;
+}
+
+.searchStatus {
+    margin-top: 8px;
+    color: #888;
+    font-size: 14px;
+}
+
+.searchResultsList {
+    margin-top: 8px;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: white;
+    border: 1px solid #f0f0f0;
+    border-radius: 4px;
+}
+
+.searchResultItem {
+    padding: 8px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.searchResultItem:last-child {
+    border-bottom: none;
+}
+
+.searchResultItem:hover {
+    background-color: #f5f5f5;
+}
+
+.poiName {
+    font-weight: 500;
+    color: #333;
+}
+
+.poiAddress {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+}

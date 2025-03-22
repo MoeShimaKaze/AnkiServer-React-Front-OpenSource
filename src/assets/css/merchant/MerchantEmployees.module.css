@@ -1,0 +1,469 @@
+/* src/assets/css/merchant/MerchantEmployees.module.css */
+
+.employeesContainer {
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #1890ff;
+    border-radius: 2px;
+}
+
+.employeesCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fafafa;
+}
+
+.cardHeader h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.addButton {
+    padding: 8px 16px;
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.addButton:hover {
+    background-color: #40a9ff;
+}
+
+.employeesList {
+    padding: 0;
+}
+
+.employeeHeader {
+    display: flex;
+    background-color: #fafafa;
+    padding: 12px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    font-weight: 500;
+    color: #666;
+}
+
+.employeeRow {
+    display: flex;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+.employeeRow:last-child {
+    border-bottom: none;
+}
+
+.employeeRow:hover {
+    background-color: #f5f5f5;
+}
+
+.currentUser {
+    background-color: #f0f7ff;
+}
+
+.currentUser:hover {
+    background-color: #e6f2ff;
+}
+
+.employeeCol {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.employeeCol:first-child {
+    flex: 2;
+}
+
+.employeeInfo {
+    display: flex;
+    align-items: center;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 12px;
+    background-color: #f0f0f0;
+}
+
+.userDetails {
+    display: flex;
+    flex-direction: column;
+}
+
+.username {
+    font-weight: 500;
+    color: #333;
+    display: flex;
+    align-items: center;
+}
+
+.email {
+    font-size: 12px;
+    color: #999;
+    margin-top: 2px;
+}
+
+.primaryUserBadge,
+.currentUserBadge {
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 10px;
+    margin-left: 8px;
+}
+
+.primaryUserBadge {
+    background-color: #fff1f0;
+    border: 1px solid #ffccc7;
+    color: #f5222d;
+}
+
+.currentUserBadge {
+    background-color: #f0f5ff;
+    border: 1px solid #adc6ff;
+    color: #2f54eb;
+}
+
+.roleBadge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+}
+
+.owner {
+    background-color: #f5222d1a;
+    border: 1px solid #ff7875;
+    color: #cf1322;
+}
+
+.admin {
+    background-color: #fa541c1a;
+    border: 1px solid #ff9c6e;
+    color: #d4380d;
+}
+
+.operator {
+    background-color: #13c2c21a;
+    border: 1px solid #5cdbd3;
+    color: #08979c;
+}
+
+.viewer {
+    background-color: #1890ff1a;
+    border: 1px solid #69c0ff;
+    color: #096dd9;
+}
+
+.actionButtons {
+    display: flex;
+    gap: 8px;
+}
+
+.editButton,
+.removeButton,
+.saveButton,
+.cancelButton {
+    padding: 6px 12px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.editButton {
+    background-color: #1890ff;
+    color: white;
+}
+
+.editButton:hover {
+    background-color: #40a9ff;
+}
+
+.removeButton {
+    background-color: #ff4d4f;
+    color: white;
+}
+
+.removeButton:hover {
+    background-color: #ff7875;
+}
+
+.removeButton:disabled {
+    background-color: #ffccc7;
+    cursor: not-allowed;
+}
+
+.saveButton {
+    background-color: #52c41a;
+    color: white;
+}
+
+.saveButton:hover {
+    background-color: #73d13d;
+}
+
+.saveButton:disabled {
+    background-color: #b7eb8f;
+    cursor: not-allowed;
+}
+
+.cancelButton {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.cancelButton:hover {
+    background-color: #e8e8e8;
+}
+
+.cancelButton:disabled {
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+.roleSelect {
+    padding: 6px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    background-color: white;
+}
+
+.formOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.formCard {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    width: 100%;
+    max-width: 480px;
+    overflow: hidden;
+}
+
+.formHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fafafa;
+}
+
+.formHeader h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.closeButton {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #999;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.closeButton:hover {
+    color: #666;
+}
+
+.addForm {
+    padding: 20px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.formGroup input,
+.formGroup select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup select:focus {
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    outline: none;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 12px;
+}
+
+.submitButton {
+    padding: 10px 20px;
+    background-color: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.submitButton:hover {
+    background-color: #40a9ff;
+}
+
+.submitButton:disabled {
+    background-color: #bae7ff;
+    cursor: not-allowed;
+}
+
+.cancelButton {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    color: #666;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.cancelButton:hover {
+    background-color: #e8e8e8;
+}
+
+.cancelButton:disabled {
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+.buttonWithLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonWithLoading span {
+    margin-left: 8px;
+}
+
+.statusMessage {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.success {
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    color: #52c41a;
+}
+
+.error {
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+    color: #f5222d;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loadingContainer p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.errorContainer {
+    padding: 30px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.errorMessage {
+    color: #f5222d;
+    font-size: 16px;
+}
+
+.emptyState {
+    padding: 40px;
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+}

@@ -1,0 +1,698 @@
+/* TicketManager.module.css */
+
+/* 页面布局 */
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #f5f7fa;
+}
+
+.ordersBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url('../../img/background_08.jpg');
+  background-size: cover; /* 确保背景图像覆盖整个容器 */
+  background-position: center; /* 确保背景图像居中 */
+  background-repeat: no-repeat; /* 防止背景图像重复 */
+  filter: blur(5px); /* 高斯模糊应用于背景 */
+  opacity: 0.8; /* 轻微降低背景不透明度 */
+  z-index: -2; /* 背景位于内容之下 */
+  transition: opacity 0.3s ease; /* 平滑的不透明度过渡效果 */
+}
+
+/* 添加一个背景叠加层以增强可读性 */
+.container::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(245, 247, 250, 0.7); /* 与原来的背景颜色相同但半透明 */
+  z-index: -1;
+  pointer-events: none; /* 确保不会阻止鼠标事件 */
+}
+
+/* 调整卡片和表格的透明度和阴影以更好地搭配背景图 */
+.form, .tableContainer, .noTickets, .errorContainer {
+  background-color: rgba(255, 255, 255, 0.92); /* 轻微透明的白色背景 */
+  backdrop-filter: blur(2px); /* 背景模糊效果 */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15); /* 增强阴影效果 */
+  transition: box-shadow 0.3s ease, transform 0.2s ease; /* 平滑过渡效果 */
+}
+
+/* 添加悬停效果 */
+.form:hover, .tableContainer:hover {
+  box-shadow: 0 6px 25px rgba(0, 0, 0, 0.18);
+  transform: translateY(-2px);
+}
+
+.container {
+  max-width: 1200px;
+  padding: 20px;
+  margin: 60px auto 0;
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 20px;
+  color: #333;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+  font-weight: 600;
+}
+
+.errorContainer {
+  text-align: center;
+  padding: 40px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin: 20px;
+}
+
+.error {
+  color: #d93025;
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.retryButton {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.retryButton:hover {
+  background-color: #3367d6;
+}
+
+/* 表单样式 */
+.form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.formHorizontal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.inputGroup {
+  flex: 1;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+/* 调整 Select 组件样式，使其宽度自适应内容 */
+:global(.ant-select) {
+  display: inline-block !important;   /* 使 Select 容器不强制占满父容器宽度 */
+}
+:global(.ant-select-selector) {
+  width: auto !important;            /* 宽度根据所选内容自动调整 */
+  min-width: 0 !important;          /* 去除默认最小宽度限制 */
+}
+
+/* 在表单输入组内的选择框占满宽度 */
+.inputGroup .selectBox {
+  width: 100%;
+}
+
+/* 每页显示选择框与前置文本的间距 */
+.pageSizeSelector .selectBox {
+  margin-left: 10px;
+}
+
+.label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #555;
+  font-size: 14px;
+}
+
+.input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fff;
+  transition: border-color 0.3s;
+}
+
+.input:focus {
+  border-color: #4285f4;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.2);
+}
+
+.button {
+  background-color: #4285f4;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #3367d6;
+}
+
+.pageSizeSelector {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;       /* 右对齐容器内容 */
+  margin: 10px 0 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+/* 通用选择框样式 */
+.selectBox {
+  padding: 10px;                   /* 内边距与输入框一致，使高度相同 */
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: #fff;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.selectBox:focus {
+  border-color: #4285f4;
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(66,133,244,0.2);  /* 聚焦时高亮边框 */
+}
+
+.pageSizeSelect {
+  margin-left: 10px;
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  background-color: white;
+  font-size: 14px;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+
+.pageSizeSelect:focus {
+  border-color: #4285f4;
+  outline: none;
+}
+
+/* 工单类型选择器 */
+.ticketTypeSelector {
+  display: flex;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.ticketTypeButton {
+  background: none;
+  border: none;
+  padding: 10px 15px;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #666;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.ticketTypeButton:hover {
+  background-color: #f5f5f5;
+}
+
+.activeTicketTypeButton {
+  font-weight: bold;
+  color: #4285f4;
+  border-bottom: 2px solid #4285f4;
+  background-color: rgba(66, 133, 244, 0.1);
+}
+
+/* 表格样式 */
+.tableContainer {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  overflow: hidden;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table th,
+.table td {
+  padding: 12px 15px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.table th {
+  background-color: #f8f9fa;
+  font-weight: 500;
+  color: #333;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+/* 可点击行样式 */
+.clickableRow {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.clickableRow:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+/* 工单标题和类型样式 */
+.ticketTitle {
+  display: flex;
+  align-items: center;
+  font-weight: 500;
+}
+
+.typeIcon {
+  margin-right: 8px;
+  font-size: 1.2em;
+  display: inline-block;
+}
+
+.ticketType {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  color: white;
+  font-size: 0.9em;
+  white-space: nowrap;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* 状态标签样式 */
+.statusBadge {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  min-width: 60px;
+}
+
+.statusBadgeOpen {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #4CAF50;
+  color: white;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  min-width: 60px;
+}
+
+.statusBadgeClosed {
+  display: inline-block;
+  padding: 4px 8px;
+  border-radius: 12px;
+  background-color: #F44336;
+  color: white;
+  font-size: 0.9em;
+  font-weight: 500;
+  text-align: center;
+  min-width: 60px;
+}
+
+/* 按钮样式 */
+.btn {
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.btnPrimary {
+  background-color: #4285f4;
+  color: white;
+}
+
+.btnPrimary:hover {
+  background-color: #3367d6;
+}
+
+.btnSecondary {
+  background-color: #f1f3f4;
+  color: #333;
+}
+
+.btnSecondary:hover {
+  background-color: #ddd;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 5px;
+}
+
+/* 加载和错误状态 */
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 200px;
+}
+
+.noTickets {
+  text-align: center;
+  padding: 40px;
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  color: #666;
+  font-style: italic;
+}
+
+/* 分页样式 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 15px;
+  border-top: 1px solid #eee;
+}
+
+.pageButton {
+  margin: 0 5px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.pageButton:hover {
+  background-color: #f5f5f5;
+}
+
+.activePageButton {
+  background-color: #4285f4;
+  color: white;
+  border-color: #4285f4;
+}
+
+.paginationArrow {
+  margin: 0 10px;
+  padding: 8px 12px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.paginationArrow:hover:not(:disabled) {
+  background-color: #f5f5f5;
+}
+
+.paginationArrow:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.pageEllipsis {
+  margin: 0 5px;
+}
+
+/* 模态框样式 */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.2s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.modalContent {
+  background-color: white;
+  border-radius: 8px;
+  width: 80%;
+  max-width: 800px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.modalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  color: white;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+
+.modalHeader h2 {
+  margin: 0;
+  font-size: 1.5em;
+  font-weight: 500;
+}
+
+.closeButton {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em;
+  cursor: pointer;
+  padding: 0;
+  margin: 0;
+  transition: opacity 0.2s;
+  opacity: 0.8;
+}
+
+.closeButton:hover {
+  opacity: 1;
+}
+
+.modalBody {
+  padding: 20px;
+}
+
+.modalFooter {
+  padding: 15px 20px;
+  display: flex;
+  justify-content: flex-end;
+  border-top: 1px solid #eee;
+  background-color: #f9f9f9;
+}
+
+.modalFooter button {
+  margin-left: 10px;
+}
+
+/* 工单详情样式 */
+.ticketInfo {
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  border: 1px solid #eee;
+}
+
+.ticketInfo p {
+  margin: 8px 0;
+  line-height: 1.5;
+}
+
+.typeSpecificInfo {
+  margin-bottom: 20px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  border: 1px solid #eee;
+}
+
+.typeSpecificInfo h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 8px;
+}
+
+.fieldItem {
+  padding: 10px 0;
+  border-bottom: 1px solid #eee;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.fieldItem:last-child {
+  border-bottom: none;
+}
+
+.fieldItem strong {
+  min-width: 120px;
+  margin-right: 10px;
+}
+
+/* 聊天预览样式 */
+.chatPreview {
+  margin-top: 20px;
+}
+
+.chatPreview h3 {
+  margin-top: 0;
+  margin-bottom: 15px;
+  font-size: 16px;
+  color: #333;
+}
+
+.chatContainer {
+  max-height: 300px;
+  overflow-y: auto;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  background-color: #fff;
+}
+
+.chatMessage {
+  padding: 10px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.chatMessage:last-child {
+  border-bottom: none;
+}
+
+.chatHeader {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 0.9em;
+}
+
+.chatUser {
+  font-weight: bold;
+  color: #4285f4;
+}
+
+.chatTime {
+  color: #777;
+  font-size: 0.85em;
+}
+
+.chatContent {
+  white-space: pre-wrap;
+  line-height: 1.4;
+  color: #333;
+}
+
+.viewMoreChat {
+  text-align: center;
+  padding: 10px;
+  background-color: #f5f5f5;
+  cursor: pointer;
+  border-top: 1px solid #eee;
+  color: #4285f4;
+  font-weight: 500;
+  transition: background-color 0.2s;
+}
+
+.viewMoreChat:hover {
+  background-color: #e8e8e8;
+}
+
+.noChatMessages {
+  padding: 20px;
+  text-align: center;
+  color: #777;
+  font-style: italic;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 768px) {
+  .formHorizontal {
+    flex-direction: column;
+  }
+
+  .inputGroup {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .table th,
+  .table td {
+    padding: 8px 10px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+    gap: 5px;
+  }
+
+  .btn {
+    width: 100%;
+  }
+
+  .ticketTypeSelector {
+    flex-wrap: wrap;
+  }
+
+  .modalContent {
+    width: 95%;
+  }
+}

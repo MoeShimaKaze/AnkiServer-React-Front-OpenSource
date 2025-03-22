@@ -1,0 +1,254 @@
+/* src/assets/css/shop/ShopManager.module.css */
+.pageContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.pageContainer::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+    transform: scale(1.02);
+    will-change: transform;
+}
+
+.pageContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.5);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.storesBackground::before {
+    background-image: url('../../img/background_43.png');
+}
+
+.productsBackground::before {
+    background-image: url('../../img/background_44.png');
+}
+
+.ordersBackground::before {
+    background-image: url('../../img/background_45.png');
+}
+
+.dashboardBackground::before {
+    background-image: url('../../img/background_46.png');
+}
+
+.contentWrapper {
+    padding: 80px 20px 20px 20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: border-radius 0.3s ease !important;
+}
+
+.contentContainer {
+    flex: 1;
+    display: flex;
+    padding: 20px;
+    margin-top: 60px;
+    position: relative;
+    z-index: 1;
+    gap: 20px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+    width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 12px !important;
+    transition: border-radius 0.3s ease !important;
+}
+
+.sidebar {
+    background: rgba(255, 255, 255, 0.95) !important;
+    border-radius: 10px !important;
+    margin-right: 20px !important;
+    overflow: hidden !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+.sidebarTitle {
+    text-align: center !important;
+    margin: 16px 0 !important;
+    color: #1890ff !important;
+}
+
+.menuList {
+    border: none;
+}
+
+.menuList :global(.ant-menu-item) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    padding: 0 !important;
+}
+
+.menuList :global(.ant-menu-title-content) {
+    margin-left: 8px !important;
+    display: inline-flex;
+    align-items: center;
+}
+
+.mainContent {
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 10px !important;
+    padding: 25px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+    min-height: calc(100vh - 140px) !important;
+    overflow: hidden !important;
+    transition: border-radius 0.3s ease !important;
+}
+
+/* 店铺列表组件样式 */
+.storeListHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.storeCard {
+    height: 100%;
+    transition: transform 0.3s;
+}
+
+.storeCard:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.storeCardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.storeCardContent {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.storeStatRow {
+    display: flex;
+    justify-content: space-between;
+}
+
+.storeAddress {
+    color: #666;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* 商品管理组件样式 */
+.productManagementHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.headerInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.productTable {
+    margin-top: 16px;
+}
+
+/* 订单管理组件样式 */
+.orderManagementHeader {
+    margin-bottom: 16px;
+}
+
+.orderTabs {
+    margin-bottom: 24px;
+}
+
+.orderTable {
+    margin-top: 16px;
+}
+
+/* 通用样式 */
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.emptyContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    gap: 20px;
+}
+
+.dashboardPlaceholder {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+    gap: 16px;
+    color: #666;
+}
+
+/* 响应式设计 */
+@media (max-width: 1024px) {
+    .contentContainer {
+        padding: 16px;
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        margin-bottom: 15px;
+    }
+}
+
+@media (max-width: 768px) {
+    .pageContainer::before {
+        transform: scale(1.05);
+    }
+
+    .contentContainer {
+        padding: 15px;
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .contentContainer {
+        padding: 12px;
+    }
+}

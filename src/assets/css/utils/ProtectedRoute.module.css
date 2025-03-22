@@ -1,0 +1,108 @@
+/* src/assets/css/utils/ProtectedRoute.module.css */
+
+.accessDeniedContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 64px);
+    padding-top: 64px; /* 导航栏高度 */
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+/* 背景图样式 */
+.adminBg {
+    background-image: url('../../img/background_31.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.messengerBg {
+    background-image: url('../../img/background_32.png');
+    background-size: cover;
+    background-position: center;
+}
+
+.defaultBg {
+    background-image: url('../../img/background_33.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
+/* 卡片样式 */
+.accessDeniedCard {
+    width: 400px;
+    padding: 32px;
+    text-align: center;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+}
+
+/* 标题样式 */
+.title {
+    font-size: 22px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #333;
+}
+
+/* 消息样式 */
+.message {
+    color: #666;
+    margin-bottom: 24px;
+    font-size: 16px;
+}
+
+/* 按钮容器 */
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+}
+
+/* 主按钮 */
+.primaryButton {
+    padding: 8px 20px;
+    background: #1890ff;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.primaryButton:hover {
+    background: #40a9ff;
+}
+
+/* 次要按钮 */
+.secondaryButton {
+    padding: 8px 20px;
+    background: #f0f0f0;
+    color: #333;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.secondaryButton:hover {
+    background: #e0e0e0;
+}
+
+/* 背景遮罩 */
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+}

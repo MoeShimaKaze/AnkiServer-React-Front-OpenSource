@@ -1,0 +1,275 @@
+/* FriendCenter.module.css */
+
+/* 基础容器样式 */
+.pageContainer {
+    min-height: 100vh;
+    padding-top: 64px;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+/* 装饰性背景 */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../img/background_21.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+/* 内容区域包装器 */
+.contentWrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+/* 主布局结构 */
+.mainContent {
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 24px;
+}
+
+/* 侧边栏样式 */
+.sidebar {
+    position: sticky;
+    top: 88px;
+    height: calc(100vh - 88px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #cbd5e0 #f8f9fa;
+}
+
+/* 侧边栏滚动条 */
+.sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.sidebar::-webkit-scrollbar-track {
+    background: #f8f9fa;
+}
+
+.sidebar::-webkit-scrollbar-thumb {
+    background-color: #cbd5e0;
+    border-radius: 3px;
+}
+
+/* 匹配类型卡片 */
+.matchTypeCard {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.matchTypeCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.matchTypeCard.selected {
+    border-color: #1890ff;
+    background-color: #e6f7ff;
+}
+
+.matchTypeIcon {
+    font-size: 24px;
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+/* 搭子卡片样式 */
+.friendCard {
+    background-color: white;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    transition: all 0.3s ease;
+}
+
+.friendCard:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.friendCardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.friendName {
+    font-size: 16px;
+    font-weight: 500;
+    color: #2d3748;
+}
+
+.matchScore {
+    color: #1890ff;
+    font-weight: 500;
+}
+
+.friendAvatar {
+    margin-right: 12px;
+}
+
+.friendCardContent {
+    color: #4a5568;
+}
+
+.university {
+    color: #718096;
+    margin-bottom: 8px;
+}
+
+.commonItems {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* 创建档案提示卡片 */
+.createProfileCard {
+    max-width: 600px;
+    margin: 40px auto;
+    background-color: white;
+    border-radius: 12px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.createProfileIcon {
+    font-size: 48px;
+    color: #1890ff;
+    margin-bottom: 24px;
+}
+
+.createProfileContent h2 {
+    margin-bottom: 16px;
+    color: #2d3748;
+}
+
+.createProfileContent p {
+    color: #718096;
+    margin-bottom: 24px;
+}
+
+/* 加载状态 */
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 88px);
+}
+
+/* 错误提示 */
+.errorAlert {
+    margin-bottom: 24px;
+}
+
+/* 响应式设计 */
+@media screen and (max-width: 1200px) {
+    .contentWrapper {
+        padding: 16px;
+    }
+}
+
+@media screen and (max-width: 992px) {
+    .mainContent {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        position: static;
+        height: auto;
+        margin-bottom: 24px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .friendCardHeader {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .matchScore {
+        margin-top: 8px;
+    }
+
+    .commonItems {
+        margin-top: 12px;
+    }
+
+    .createProfileCard {
+        padding: 20px;
+        margin: 20px auto;
+    }
+}
+
+/* 暗色主题支持 */
+:global(.ant-app-dark) {
+    .pageContainer {
+        background-color: #141414;
+    }
+
+    .matchTypeCard.selected {
+        background-color: #111b26;
+        border-color: #177ddc;
+    }
+
+    .friendCard {
+        background-color: #1f1f1f;
+    }
+
+    .university {
+        color: #999;
+    }
+
+    .friendName {
+        color: #e8e8e8;
+    }
+
+    .matchTypeCard,
+    .createProfileCard {
+        background-color: #1f1f1f;
+        border-color: #303030;
+    }
+
+    .createProfileContent h2 {
+        color: #e8e8e8;
+    }
+
+    .createProfileContent p {
+        color: #999;
+    }
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.matchTypeCard,
+.friendCard,
+.createProfileCard {
+    animation: fadeIn 0.3s ease;
+}

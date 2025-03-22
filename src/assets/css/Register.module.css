@@ -1,0 +1,93 @@
+/* Register.module.css - 适配Ant Design */
+
+/* 注册容器的基本样式 */
+.registerContainer {
+  font-family: Arial, sans-serif;
+  position: relative;
+  color: #0056b3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  margin: 0;
+  padding: 20px 0;
+  overflow: hidden;
+}
+
+/* 背景模糊效果 */
+.backgroundBlur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../img/background_02.jpg');
+  background-size: cover;
+  filter: blur(0px);
+  transition: filter 0.3s;
+  z-index: -1;
+}
+
+.blur {
+  filter: blur(20px);
+}
+
+/* 注册表单的主要样式 */
+.registerForm {
+  background: rgba(255, 255, 255, 0.8);
+  padding: 40px !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+  width: 75%;
+  max-width: 600px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+  margin-top: 60px; /* 为Navbar留出空间 */
+  margin-bottom: 30px;
+}
+
+/* 注册标题样式 */
+.registerTitle {
+  font-size: 24px;
+  margin-bottom: 20px !important;
+  color: #0056b3;
+  text-align: center;
+}
+
+/* 提交按钮样式 */
+.submitButton {
+  height: 45px !important;
+  font-size: 16px !important;
+  background-color: #007bff !important;
+  border-color: #007bff !important;
+}
+
+.submitButton:hover {
+  background-color: #0056b3 !important;
+  border-color: #0056b3 !important;
+}
+
+.submitButton:disabled {
+  background-color: #cccccc !important;
+  border-color: #cccccc !important;
+}
+
+/* 下拉选择框特殊样式 */
+.ant-select-selector {
+  height: 40px !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .registerForm {
+    width: 90%;
+    padding: 20px !important;
+  }
+
+  .registerTitle {
+    font-size: 20px;
+  }
+}

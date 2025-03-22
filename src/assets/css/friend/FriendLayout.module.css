@@ -1,0 +1,76 @@
+/* FriendLayout.module.css */
+
+.pageContainer {
+    min-height: 100vh;
+    padding-top: 64px; /* 导航栏高度 */
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+/* 各页面背景 */
+.defaultBg {
+    background-image: url('../../img/background_21.jpg');
+}
+
+.createProfileBg {
+    background-image: url('../../img/background_22.png');
+}
+
+.detailBg {
+    background-image: url('../../img/background_23.jpg');
+}
+
+.matchesBg {
+    background-image: url('../../img/background_24.jpg');
+}
+
+.myFriendsBg {
+    background-image: url('../../img/background_25.jpg');
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.layoutContainer {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 20px;
+}
+
+.mainContent {
+    min-width: 0; /* 防止内容溢出 */
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .layoutContainer {
+        grid-template-columns: 1fr;
+    }
+
+    .contentWrapper {
+        padding: 16px;
+    }
+}
+
+@media (max-width: 576px) {
+    .contentWrapper {
+        padding: 12px;
+    }
+}

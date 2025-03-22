@@ -1,0 +1,282 @@
+/* src/assets/css/admin/AdminProductReview.module.css */
+
+/* 基础布局 */
+.pageContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    padding: 20px;
+}
+
+/* 修改内容容器的最大宽度 */
+.contentWrapper {
+    padding: 80px 20px 20px 20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: border-radius 0.3s ease;
+    max-width: 1200px; /* 添加最大宽度限制 */
+    margin: 0 auto; /* 居中显示 */
+}
+
+/* 背景图片基础样式 */
+.pageContainer::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+    transform: scale(1.02);
+    will-change: transform;
+}
+
+/* 背景遮罩层 */
+.pageContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.5);
+    z-index: -1;
+    pointer-events: none;
+}
+
+/* 不同背景样式 */
+.defaultBackground::before {
+    background-image: url('../../img/background_51.jpg');
+}
+
+.reviewBackground::before {
+    background-image: url('../../img/background_52.jpg');
+}
+
+.statisticsBackground::before {
+    background-image: url('../../img/background_53.jpg');
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1890ff;
+    position: relative;
+    padding-bottom: 8px;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 80px;
+    height: 3px;
+    background: #1890ff;
+    border-radius: 2px;
+}
+
+/* 调整状态卡片容器样式 */
+.dashboardContainer {
+    margin-bottom: 24px;
+    max-width: 1200px; /* 限制最大宽度 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.statusCard {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 20px;
+}
+
+.statusTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 12px;
+}
+
+/* 调整统计数据网格布局 */
+.statsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 固定为4列 */
+    gap: 16px;
+}
+
+/* 状态卡片固定宽度 */
+.statItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f5f5f5;
+    padding: 16px;
+    border-radius: 6px;
+    transition: all 0.3s;
+    min-width: 150px; /* 设置最小宽度 */
+    max-width: 260px; /* 设置最大宽度 */
+}
+
+.statItem:hover {
+    background-color: #e6f7ff;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.09);
+}
+
+.pending {
+    border-left: 4px solid #1890ff;
+}
+
+.approved {
+    border-left: 4px solid #52c41a;
+}
+
+.rejected {
+    border-left: 4px solid #f5222d;
+}
+
+.outOfStock {
+    border-left: 4px solid #faad14;
+}
+
+.statValue {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1890ff;
+    margin-bottom: 4px;
+}
+
+.statLabel {
+    font-size: 14px;
+    color: #666;
+}
+
+/* 商品列表容器宽度限制 */
+.productList {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    max-width: 1200px; /* 限制最大宽度 */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* 确保表格在小屏幕上能滚动 */
+.tableContainer {
+    overflow-x: auto;
+    width: 100%;
+}
+
+.tableHeader {
+    background-color: #f5f5f5;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e8e8e8;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.tableTitle {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin: 0;
+}
+
+.filterActions {
+    display: flex;
+    gap: 8px;
+}
+
+.emptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    color: #999;
+}
+
+.emptyIcon {
+    font-size: 48px;
+    margin-bottom: 16px;
+}
+
+.reviewModal {
+    max-width: 600px;
+}
+
+.productDetail {
+    margin-bottom: 20px;
+}
+
+.productName {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #333;
+}
+
+.productInfo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.infoItem {
+    margin-bottom: 8px;
+}
+
+.infoLabel {
+    color: #666;
+    margin-right: 8px;
+}
+
+.infoValue {
+    color: #333;
+    font-weight: 500;
+}
+
+.imagePreview {
+    max-width: 100%;
+    border-radius: 4px;
+    margin-bottom: 16px;
+    border: 1px solid #e8e8e8;
+}
+
+.actionButtons {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+}
+
+@media (max-width: 768px) {
+    .statsGrid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .productInfo {
+        grid-template-columns: 1fr;
+    }
+}

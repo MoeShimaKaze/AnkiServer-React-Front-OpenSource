@@ -1,0 +1,275 @@
+/* src/assets/css/merchant/MerchantInfo.module.css */
+
+.merchantInfoContainer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #1890ff;
+    border-radius: 2px;
+}
+
+.infoCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 24px;
+    margin-bottom: 20px;
+}
+
+.basicInfo {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.infoRow {
+    display: flex;
+    margin-bottom: 16px;
+    align-items: center;
+}
+
+.infoLabel {
+    flex: 0 0 120px;
+    font-weight: 500;
+    color: #666;
+}
+
+.infoValue {
+    flex: 1;
+    color: #333;
+}
+
+.statusBadge, .levelBadge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.approved {
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    color: #52c41a;
+}
+
+.pending {
+    background-color: #e6f7ff;
+    border: 1px solid #91d5ff;
+    color: #1890ff;
+}
+
+.rejected {
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+    color: #f5222d;
+}
+
+.bronze {
+    background-color: #fff7e6;
+    border: 1px solid #ffd591;
+    color: #fa8c16;
+}
+
+.silver {
+    background-color: #f5f5f5;
+    border: 1px solid #d9d9d9;
+    color: #666;
+}
+
+.gold {
+    background-color: #fffbe6;
+    border: 1px solid #ffe58f;
+    color: #faad14;
+}
+
+.platinum {
+    background-color: #fcfcfc;
+    border: 1px solid #e8e8e8;
+    color: #262626;
+}
+
+.diamond {
+    background-color: #f0f5ff;
+    border: 1px solid #adc6ff;
+    color: #2f54eb;
+}
+
+.editableInfo {
+    margin-top: 20px;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #333;
+}
+
+.formGroup input,
+.formGroup textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #d9d9d9;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+    border-color: #40a9ff;
+    box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+    outline: none;
+}
+
+.formActions {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 30px;
+    gap: 12px;
+}
+
+.cancelButton,
+.submitButton,
+.editButton,
+.backButton {
+    min-width: 100px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.cancelButton {
+    background-color: #f5f5f5;
+    color: #666;
+}
+
+.cancelButton:hover {
+    background-color: #e8e8e8;
+}
+
+.cancelButton:disabled {
+    background-color: #f5f5f5;
+    color: #bbb;
+    cursor: not-allowed;
+}
+
+.submitButton {
+    background-color: #1890ff;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #40a9ff;
+}
+
+.submitButton:disabled {
+    background-color: #bae7ff;
+    cursor: not-allowed;
+}
+
+.editButton {
+    background-color: #1890ff;
+    color: white;
+}
+
+.editButton:hover {
+    background-color: #40a9ff;
+}
+
+.backButton {
+    background-color: #1890ff;
+    color: white;
+}
+
+.backButton:hover {
+    background-color: #40a9ff;
+}
+
+.buttonWithLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.buttonWithLoading span {
+    margin-left: 8px;
+}
+
+.statusMessage {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.success {
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    color: #52c41a;
+}
+
+.error {
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+    color: #f5222d;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loadingContainer p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.errorContainer {
+    padding: 30px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.errorMessage {
+    margin-bottom: 20px;
+    color: #f5222d;
+    font-size: 16px;
+}

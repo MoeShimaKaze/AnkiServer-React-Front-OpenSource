@@ -1,0 +1,275 @@
+/* src/assets/css/shop/OrderDetail.module.css */
+.orderDetailContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+.contentWrapper {
+    padding: 80px 20px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breadcrumbSection {
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    font-size: 16px;
+}
+
+.backButton {
+    padding: 0;
+}
+
+.orderStatusCard {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.orderTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.orderStatus {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.orderActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.orderProgress {
+    margin-top: 24px;
+}
+
+.detailsRow {
+    margin-bottom: 24px;
+}
+
+.orderInfoCard {
+    height: 100%;
+}
+
+.priceCard {
+    height: 100%;
+}
+
+.priceInfo {
+    margin-bottom: 24px;
+}
+
+.priceItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.totalPrice {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.refundInfo {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.refundStatus {
+    margin-bottom: 12px;
+}
+
+.refundAmount {
+    margin-bottom: 8px;
+}
+
+.refundReason {
+    margin-bottom: 8px;
+}
+
+.routeSection {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.routeButton {
+    width: 100%;
+    max-width: 300px;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.emptyContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    gap: 20px;
+}/* src/assets/css/shop/OrderDetail.module.css */
+.orderDetailContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    background-color: #f5f5f5;
+    position: relative;
+}
+
+.contentWrapper {
+    padding: 80px 20px 20px 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.breadcrumbSection {
+    margin-bottom: 20px;
+}
+
+.breadcrumb {
+    font-size: 16px;
+}
+
+.backButton {
+    padding: 0;
+}
+
+.orderStatusCard {
+    background-color: #fff;
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.orderHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.orderTitle {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.orderStatus {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.orderActions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.orderProgress {
+    margin-top: 24px;
+}
+
+.detailsRow {
+    margin-bottom: 24px;
+}
+
+.orderInfoCard {
+    height: 100%;
+}
+
+.priceCard {
+    height: 100%;
+}
+
+.priceInfo {
+    margin-bottom: 24px;
+}
+
+.priceItem {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+}
+
+.totalPrice {
+    margin-top: 16px;
+    text-align: center;
+}
+
+.refundInfo {
+    margin-top: 16px;
+    padding: 16px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+}
+
+.refundStatus {
+    margin-bottom: 12px;
+}
+
+.refundAmount {
+    margin-bottom: 8px;
+}
+
+.refundReason {
+    margin-bottom: 8px;
+}
+
+.routeSection {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+}
+
+.routeButton {
+    width: 100%;
+    max-width: 300px;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.emptyContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+    gap: 20px;
+}

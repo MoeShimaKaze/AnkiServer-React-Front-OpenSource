@@ -1,0 +1,89 @@
+/* Login.module.css - 调整后适配Ant Design */
+.backgroundBlur {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../img/background_01.jpg');
+  background-size: cover;
+  filter: blur(0px); /* 默认不模糊 */
+  transition: filter 0.3s; /* 平滑过渡效果 */
+  z-index: -2; /* 确保在内容下方 */
+}
+
+.activeBlur {
+  filter: blur(20px); /* 应用高斯模糊 */
+}
+
+.loginContainer {
+  font-family: Arial, sans-serif;
+  position: relative;
+  color: #333;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  overflow: hidden; /* 防止模糊扩展到容器外 */
+}
+
+.formWrapper {
+  width: 600px;
+  max-width: 90%;
+  z-index: 1;
+}
+
+.form {
+  width: 100%;
+  padding: 40px !important; /* 覆盖Ant Design Card的内边距 */
+  border-radius: 8px !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+.formTitle {
+  color: #0056b3;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 24px;
+}
+
+/* 覆盖Ant Design按钮样式 */
+.submitButton {
+  height: 40px !important;
+  font-size: 16px !important;
+  margin-top: 10px !important;
+}
+
+.alipayButton {
+  height: 40px !important;
+  font-size: 16px !important;
+  background-color: #00a0e9 !important;
+  color: white !important;
+  border-color: #00a0e9 !important;
+  margin-bottom: 20px !important;
+}
+
+.alipayButton:hover {
+  background-color: #0087c3 !important;
+  border-color: #0087c3 !important;
+}
+
+.alipayButton:disabled {
+  background-color: #ccc !important;
+  color: rgba(0, 0, 0, 0.25) !important;
+  border-color: #d9d9d9 !important;
+}
+
+.links {
+  text-align: center;
+  margin-top: 16px;
+}
+
+.registerLink {
+  color: #0056b3;
+}
+
+.registerLink:hover {
+  text-decoration: underline;
+}

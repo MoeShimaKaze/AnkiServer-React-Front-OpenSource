@@ -1,0 +1,66 @@
+/* MapSelector.module.css - 修改后 */
+.container {
+    margin-bottom: 15px;
+}
+
+.inputGroup {
+    display: flex;
+    margin-bottom: 10px;
+    gap: 8px;
+}
+
+.status {
+    display: block;
+    margin-bottom: 10px;
+    padding: 4px 0;
+}
+
+.resultsList {
+    margin-bottom: 10px;
+    max-height: 150px;
+    overflow-y: auto;
+}
+
+.resultItem {
+    transition: background-color 0.3s ease;
+}
+
+.resultItem:hover {
+    background-color: #f0f0f0;
+}
+
+.mapContainer {
+    position: relative;
+    height: 300px;
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.mapLoading {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.7);
+    z-index: 1;
+}
+
+.mapContent {
+    height: 100%;
+    width: 100%;
+}
+
+/* 兼容Ant Design样式 */
+:global(.ant-input-group-wrapper) {
+    flex: 1;
+}
+
+:global(.ant-list-item-hoverable:hover) {
+    background-color: #f5f5f5;
+}

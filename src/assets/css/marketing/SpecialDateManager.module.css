@@ -1,0 +1,334 @@
+/* src/assets/css/marketing/SpecialDateManager.module.css */
+.specialDateContainer {
+    width: 100%;
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+/* 工具栏容器样式 */
+.toolbarContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 16px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03);
+}
+
+/* 搜索容器样式优化 */
+.searchContainer {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* 日期选择器样式 */
+.datePicker {
+    min-width: 280px;
+}
+
+/* 刷新按钮样式 */
+.refreshButton {
+    height: 38px;
+    padding: 0 16px;
+}
+
+/* 操作容器样式优化 */
+.actionContainer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* 新增按钮样式 */
+.addButton {
+    height: 38px;
+    padding: 0 16px;
+    font-weight: 500;
+}
+
+/* 批量操作按钮样式 */
+.batchEnableButton,
+.batchDisableButton {
+    height: 38px;
+    padding: 0 16px;
+}
+
+/* 表格样式优化 */
+.dataTable {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+/* 表格单元格样式优化 - 确保内容居中显示 */
+.dataTable :global(.ant-table-cell) {
+    padding: 14px 16px !important;
+    font-size: 14px;
+    text-align: center !important; /* 确保所有单元格内容居中 */
+}
+
+/* 表头样式 */
+.dataTable :global(.ant-table-thead > tr > th) {
+    background-color: #f0f5ff !important;
+    font-weight: 600;
+    color: #333;
+    padding: 16px !important;
+    text-align: center !important; /* 确保表头内容居中 */
+}
+
+/* 表格行样式 */
+.dataTable :global(.ant-table-tbody > tr) {
+    transition: background-color 0.3s;
+}
+
+/* 表格行悬停效果 */
+.dataTable :global(.ant-table-tbody > tr:hover) {
+    background-color: #e6f7ff !important;
+}
+
+/* 交替行颜色 */
+.dataTable :global(.ant-table-tbody > tr:nth-child(odd)) {
+    background-color: #fafafa;
+}
+
+/* 特定单元格样式优化 */
+.nameCell {
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 确保名称单元格内容居中 */
+    font-weight: 500;
+    color: #333;
+}
+
+.dateCell {
+    font-family: monospace;
+    letter-spacing: 0.5px;
+}
+
+.rateCell {
+    font-weight: 500;
+    color: #f5222d;
+}
+
+.feeTypeCell {
+    padding: 4px 8px;
+    background-color: #f9f9f9;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.priorityCell {
+    font-weight: 500;
+    text-align: center;
+}
+
+.descriptionCell {
+    max-width: 200px;
+}
+
+/* 日期标签样式 */
+.dateTypeTag {
+    margin-left: 8px !important;
+    font-size: 12px;
+    line-height: 16px;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+
+/* 状态容器样式 */
+.statusContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center; /* 确保状态标签居中 */
+}
+
+/* 状态标签样式 */
+.statusContainer :global(.ant-tag) {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin: 0;
+    padding: 4px 8px;
+    font-size: 12px;
+    line-height: 1.2;
+    border-radius: 4px;
+}
+
+/* 操作栏样式 */
+.actionCell {
+    white-space: nowrap;
+}
+
+/* 操作按钮容器 - 允许在空间不足时纵向排列 */
+.actionSpace {
+    display: flex;
+    gap: 8px;
+    justify-content: center; /* 确保按钮居中 */
+}
+
+/* 编辑和删除按钮样式 */
+.editButton,
+.deleteButton {
+    height: auto;
+    padding: 4px 12px;
+    font-size: 13px;
+    border-radius: 4px;
+}
+
+/* 模态框样式 */
+.formModal :global(.ant-modal-content) {
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.formModal :global(.ant-modal-header) {
+    background-color: #f0f5ff;
+    padding: 16px 24px;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+.formModal :global(.ant-modal-title) {
+    color: #0056b3;
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.formModal :global(.ant-modal-body) {
+    padding: 24px;
+}
+
+.formModal :global(.ant-modal-footer) {
+    border-top: 1px solid #e8e8e8;
+    padding: 16px 24px;
+}
+
+/* 表单样式 */
+.specialDateForm :global(.ant-form-item-label) {
+    font-weight: 500;
+    color: #333;
+}
+
+.specialDateForm :global(.ant-form-item) {
+    margin-bottom: 20px;
+}
+
+.specialDateForm :global(.ant-form-item-control-input) {
+    min-height: 40px;
+}
+
+.specialDateForm :global(.ant-input),
+.specialDateForm :global(.ant-select-selector),
+.specialDateForm :global(.ant-picker) {
+    height: 40px;
+    border-radius: 4px;
+}
+
+.specialDateForm :global(.ant-input-number) {
+    width: 100%;
+    height: 40px;
+}
+
+.specialDateForm :global(.ant-input-number-input) {
+    height: 38px;
+}
+
+.specialDateForm :global(.ant-input-textarea textarea) {
+    min-height: 80px;
+    border-radius: 4px;
+}
+
+/* 操作按钮容器 - 纵向排列 */
+.actionButtons {
+    display: flex;
+    flex-direction: column; /* 关键属性：确保按钮垂直排列 */
+    gap: 8px; /* 按钮之间的间距 */
+    align-items: center; /* 水平居中对齐 */
+}
+
+/* 确保编辑和删除按钮宽度一致 */
+.editButton,
+.deleteButton {
+    width: 90px; /* 设置固定宽度，保持一致性 */
+    height: auto;
+    padding: 4px 8px;
+    font-size: 13px;
+    border-radius: 4px;
+    margin: 0; /* 移除可能的外边距 */
+}
+
+/* 可选：为按钮添加过渡效果 */
+.editButton:hover,
+.deleteButton:hover {
+    transform: translateY(-2px);
+    transition: all 0.3s ease;
+}
+
+/* 开关容器样式 */
+.switchContainer {
+    display: flex;
+    gap: 24px;
+    margin-top: 16px;
+}
+
+.switchContainer :global(.ant-form-item) {
+    margin-bottom: 0;
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+
+/* 响应式调整 - 包括按钮纵向排列的规则 */
+@media screen and (max-width: 1200px) {
+    /* 在屏幕较窄时，操作按钮改为纵向排列 */
+    .actionSpace {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .editButton,
+    .deleteButton {
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .toolbarContainer {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+
+    .searchContainer,
+    .actionContainer {
+        width: 100%;
+    }
+
+    .switchContainer {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .actionContainer > :global(.ant-space) {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .actionContainer button {
+        width: 100%;
+    }
+
+    .batchEnableButton,
+    .batchDisableButton {
+        margin-top: 8px;
+    }
+}

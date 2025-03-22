@@ -1,0 +1,84 @@
+/* src/assets/css/purchaserequest/MyPurchaseRequests.module.css */
+
+.container {
+    width: 100%;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.titleIcon {
+    font-size: 24px;
+    color: #1890ff;
+}
+
+.title h2 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.filters {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.filterLabel {
+    color: #666;
+    font-size: 14px;
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 300px;
+}
+
+.listContent {
+    margin-top: 20px;
+}
+
+.pagination {
+    margin-top: 32px;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.emptyContainer {
+    padding: 40px;
+    text-align: center;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.85) !important;
+    border-radius: 10px !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .filters {
+        width: 100%;
+    }
+
+    .pagination {
+        justify-content: center;
+    }
+}

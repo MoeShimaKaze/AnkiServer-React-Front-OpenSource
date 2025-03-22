@@ -1,0 +1,204 @@
+/* PaymentStatus.module.css中添加 */
+.paymentStatusContainer {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
+
+.paymentInfo {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.paymentInfo p {
+    margin: 0;
+    padding: 8px;
+    background: #f8f9fa;
+    border-radius: 4px;
+}
+
+/* Forms */
+.formContainer {
+    background: rgba(255, 255, 255, 0.9);
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 20px auto;
+    max-width: 600px;
+}
+
+.form,
+.modalContent form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 15px;
+}
+
+/* Typography */
+.sidebar h2,
+.formTitle,
+.modalContent h2,
+.title {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.error,
+.success {
+    padding: 12px;
+    border-radius: 8px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.error {
+    background-color: #ffe6e6;
+    color: #dc3545;
+}
+
+.success {
+    background-color: #e6ffe6;
+    color: #28a745;
+}
+
+/* 信息文本样式 */
+.infoText {
+    padding: 12px 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #e9ecef;
+    border-radius: 6px;
+    color: #495057;
+    font-size: 16px;
+    line-height: 1.5;
+    font-weight: 500;
+    transition: background-color 0.2s ease;
+    word-break: break-all;
+    min-height: 24px;
+    display: flex;
+    align-items: center;
+}
+
+.infoText:hover {
+    background-color: #e9ecef;
+}
+
+.loadingWrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px); /* 减去导航栏高度 */
+    background: rgba(255, 255, 255, 0.9);
+    backdrop-filter: blur(5px);
+    border-radius: 10px;
+    margin: 20px;
+}
+
+/* 支付过期时间相关样式 */
+.expireTimeContainer {
+    margin-top: 16px;
+    padding: 12px;
+    background-color: #fff8f8;
+    border: 1px solid #ffcdd2;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.expireTimeIcon {
+    width: 24px;
+    height: 24px;
+    color: #f44336;
+    /* 如果使用图标字体，可以设置字体大小 */
+    font-size: 24px;
+}
+
+.expireTimeInfo {
+    flex: 1;
+}
+
+.expireTimeLabel {
+    font-size: 14px;
+    color: #f44336;
+    font-weight: 500;
+    margin-bottom: 4px;
+}
+
+.expireTimeValue {
+    font-size: 16px;
+    color: #d32f2f;
+    font-weight: 600;
+    font-family: monospace; /* 使用等宽字体显示时间 */
+}
+
+.expireTimeWarning {
+    font-size: 12px;
+    color: #f44336;
+    margin-top: 4px;
+}
+
+/* 过期时间倒计时效果 */
+.expireTimeCountdown {
+    padding: 4px 8px;
+    background-color: #ffebee;
+    border-radius: 4px;
+    font-weight: 600;
+
+    /* 当剩余时间小于5分钟时的动画效果 */
+    &.urgent {
+        animation: pulseWarning 1s infinite;
+    }
+}
+
+/* 倒计时警告动画 */
+@keyframes pulseWarning {
+    0% {
+        background-color: #ffebee;
+    }
+    50% {
+        background-color: #ffcdd2;
+    }
+    100% {
+        background-color: #ffebee;
+    }
+}
+
+/* 响应式设计适配 */
+@media (max-width: 768px) {
+    .expireTimeContainer {
+        padding: 8px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .expireTimeIcon {
+        width: 20px;
+        height: 20px;
+        font-size: 20px;
+    }
+
+    .expireTimeLabel {
+        font-size: 13px;
+    }
+
+    .expireTimeValue {
+        font-size: 14px;
+    }
+
+    .expireTimeWarning {
+        font-size: 11px;
+    }
+}

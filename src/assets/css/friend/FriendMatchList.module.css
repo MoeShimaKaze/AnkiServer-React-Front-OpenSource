@@ -1,0 +1,276 @@
+/* FriendMatchList.module.css */
+
+.pageContainer {
+    min-height: 100vh;
+    padding-top: 64px;
+    position: relative;
+    background-color: #f8f9fa;
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../img/background_24.jpg');
+    background-size: cover;
+    background-position: center;
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.contentWrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.headerSection {
+    margin-bottom: 24px;
+}
+
+.title {
+    font-size: 28px;
+    font-weight: 600;
+    color: #2d3748;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.titleIcon {
+    font-size: 24px;
+    margin-left: 12px;
+}
+
+.filterSection {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 16px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.filterItem {
+    display: flex;
+    align-items: center;
+}
+
+.filterLabel {
+    margin-right: 8px;
+    color: #4a5568;
+    white-space: nowrap;
+}
+
+.selector {
+    width: 160px;
+}
+
+.filterButton {
+    margin-left: auto;
+}
+
+.matchesContainer {
+    min-height: 300px;
+}
+
+.matchList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 16px;
+}
+
+.friendCard {
+    height: 100%;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.friendCard:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-4px);
+}
+
+.cardTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+}
+
+.matchScore {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.cardDescription {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.university {
+    color: #718096;
+    font-size: 14px;
+}
+
+.tagContainer {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+
+.matchTag {
+    margin: 0;
+}
+
+.matchFeatures {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+}
+
+.featureLabel {
+    color: #718096;
+    font-size: 13px;
+}
+
+.featureTag {
+    margin: 0;
+}
+
+.loadingContainer,
+.errorContainer,
+.emptyContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+}
+
+.paginationContainer {
+    margin-top: 32px;
+    display: flex;
+    justify-content: center;
+}
+
+.initialStateContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 300px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 32px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.initialStateContent {
+    text-align: center;
+    max-width: 500px;
+}
+
+.initialStateIcon {
+    font-size: 48px;
+    color: #1890ff;
+    margin-bottom: 16px;
+}
+
+.initialStateContent h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #2d3748;
+}
+
+.initialStateContent p {
+    color: #718096;
+    font-size: 16px;
+}
+
+.alertTip {
+    margin-top: 16px;
+}
+
+/* 响应式设计 */
+@media (max-width: 992px) {
+    .matchList {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    }
+
+    .filterSection {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+
+    .filterItem {
+        width: 100%;
+    }
+
+    .selector {
+        width: 100%;
+    }
+
+    .filterButton {
+        margin-left: 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .matchList {
+        grid-template-columns: 1fr;
+    }
+
+    .title {
+        font-size: 24px;
+    }
+
+    .contentWrapper {
+        padding: 16px;
+    }
+}
+
+/* 暗色主题支持 */
+:global(.ant-app-dark) {
+    .pageContainer {
+        background-color: #141414;
+    }
+
+    .title {
+        color: #e6e6e6;
+    }
+
+    .filterSection {
+        background: #1f1f1f;
+        border: 1px solid #303030;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .filterLabel {
+        color: #a6a6a6;
+    }
+
+    .friendCard {
+        background-color: #1f1f1f;
+        border-color: #303030;
+    }
+
+    .university {
+        color: #a6a6a6;
+    }
+
+    .featureLabel {
+        color: #a6a6a6;
+    }
+}

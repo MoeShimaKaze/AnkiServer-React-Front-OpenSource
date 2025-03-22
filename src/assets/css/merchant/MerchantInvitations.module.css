@@ -1,0 +1,227 @@
+/* src/assets/css/merchant/MerchantInvitations.module.css */
+
+.invitationsContainer {
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.title {
+    font-size: 24px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 24px;
+    text-align: center;
+    position: relative;
+    padding-bottom: 12px;
+}
+
+.title::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 3px;
+    background: #1890ff;
+    border-radius: 2px;
+}
+
+.invitationsCard {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+.cardHeader {
+    padding: 16px 20px;
+    border-bottom: 1px solid #f0f0f0;
+    background-color: #fafafa;
+}
+
+.cardHeader h3 {
+    margin: 0;
+    font-size: 18px;
+    color: #333;
+}
+
+.invitationsList {
+    padding: 0;
+}
+
+.invitationItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+    transition: background-color 0.3s;
+}
+
+.invitationItem:last-child {
+    border-bottom: none;
+}
+
+.invitationItem:hover {
+    background-color: #f5f5f5;
+}
+
+.invitationInfo {
+    flex: 1;
+}
+
+.merchantName {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 8px;
+}
+
+.invitationDetails {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    color: #666;
+    font-size: 14px;
+}
+
+.invitedBy,
+.invitedRole,
+.invitedDate {
+    display: flex;
+    align-items: center;
+}
+
+.roleBadge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 12px;
+    margin-left: 4px;
+}
+
+.owner {
+    background-color: #f5222d1a;
+    border: 1px solid #ff7875;
+    color: #cf1322;
+}
+
+.admin {
+    background-color: #fa541c1a;
+    border: 1px solid #ff9c6e;
+    color: #d4380d;
+}
+
+.operator {
+    background-color: #13c2c21a;
+    border: 1px solid #5cdbd3;
+    color: #08979c;
+}
+
+.viewer {
+    background-color: #1890ff1a;
+    border: 1px solid #69c0ff;
+    color: #096dd9;
+}
+
+.invitationActions {
+    display: flex;
+    gap: 10px;
+}
+
+.acceptButton,
+.rejectButton {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.acceptButton {
+    background-color: #52c41a;
+    color: white;
+}
+
+.acceptButton:hover {
+    background-color: #73d13d;
+}
+
+.acceptButton:disabled {
+    background-color: #b7eb8f;
+    cursor: not-allowed;
+}
+
+.rejectButton {
+    background-color: #ff4d4f;
+    color: white;
+}
+
+.rejectButton:hover {
+    background-color: #ff7875;
+}
+
+.rejectButton:disabled {
+    background-color: #ffccc7;
+    cursor: not-allowed;
+}
+
+.statusMessage {
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.success {
+    background-color: #f6ffed;
+    border: 1px solid #b7eb8f;
+    color: #52c41a;
+}
+
+.error {
+    background-color: #fff2f0;
+    border: 1px solid #ffccc7;
+    color: #f5222d;
+}
+
+.loadingContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.loadingContainer p {
+    margin-top: 20px;
+    color: #666;
+}
+
+.errorContainer {
+    padding: 30px;
+    text-align: center;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.errorMessage {
+    color: #f5222d;
+    font-size: 16px;
+}
+
+.emptyState {
+    padding: 40px;
+    text-align: center;
+    color: #999;
+    font-size: 16px;
+}

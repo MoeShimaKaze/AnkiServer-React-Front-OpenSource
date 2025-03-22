@@ -1,0 +1,368 @@
+/* 调整背景遮罩 */
+.profileBackground {
+  position: fixed;
+  top: 64px; /* 从导航栏下方开始 */
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+
+.profileBackground::before {
+  content: "";
+  position: absolute;
+  top: -5px; /* 稍微扩大一点覆盖范围，防止模糊效果露出边缘 */
+  left: -5px;
+  right: -5px;
+  bottom: -5px;
+  background-image: url('../../img/background_09.jpg');
+  background-size: cover;
+  background-position: center; /* 确保背景图居中 */
+  background-attachment: fixed; /* 使背景图相对于视口固定 */
+  filter: blur(5px);
+  transform: scale(1.1); /* 稍微放大，防止模糊边缘显露 */
+}
+
+/* 修改主容器样式 */
+.profileContainer {
+  font-family: Arial, sans-serif;
+  position: relative;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.75);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  max-width: 800px;
+  margin: 20px auto; /* 调整上边距 */
+  height: calc(80vh - 64px); /* 考虑导航栏高度调整容器高度 */
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* 调整标题样式 */
+.profileContainer h2 {
+  margin-top: 0; /* 移除标题上边距 */
+  margin-bottom: 20px; /* 增加标题下边距 */
+  color: #0056b3;
+  font-weight: bold;
+  width: 100%;
+  text-align: center;
+}
+
+/* 调整消息列表容器 */
+.messagesList {
+  list-style: none;
+  width: 100%;
+  height: calc(70vh - 64px); /* 调整高度以适应导航栏 */
+  overflow-y: auto;
+  margin-bottom: 20px;
+  /* 添加内部上边距 */
+  padding: 10px 0 0;
+}
+
+.pageContainer {
+  min-height: 100vh;
+  background-color: #f5f5f5;
+}
+
+.contentWrapper {
+  display: flex;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px;
+  gap: 20px;
+}
+
+.chatSection {
+  flex: 1;
+  min-width: 0; /* 防止flex子项溢出 */
+}
+
+/* 新代码 */
+.notificationSidebar {
+  width: 280px;
+  position: relative; /* 改为相对定位 */
+  height: fit-content;
+  margin-left: 20px; /* 添加左边距与主聊天容器保持距离 */
+  margin-top: 80px; /* 与主容器顶部对齐 */
+  flex-shrink: 0; /* 防止挤压 */
+}
+
+.notificationCard {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  text-align: left;
+  transition: margin-top 0.3s ease;
+}
+
+/* 主内容区域 - 确保可以正常交互 */
+.mainContent {
+  flex: 1;
+  min-width: 0;
+  position: relative; /* 创建独立的堆叠上下文 */
+  z-index: 1; /* 确保主内容区域可以被点击 */
+}
+
+.contentLayout {
+  display: flex;
+  max-width: 1400px;
+  padding: 20px;
+  gap: 24px;
+  min-height: calc(100vh - 64px); /* 减去导航栏高度 */
+  position: relative;
+  /* 为顶部导航栏留出空间 */
+  margin: 64px auto 0;
+}
+
+.notificationIcon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 16px;
+  background: #e6f7ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #1890ff;
+}
+
+.notificationTitle {
+  font-size: 16px;
+  font-weight: 600;
+  color: #1a1a1a;
+  margin-bottom: 8px;
+  text-align: center;
+}
+
+.notificationText {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 16px;
+  text-align: center;
+}
+
+.enableButton {
+  width: 100%;
+  padding: 8px 0;
+  background-color: #1890ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.enableButton:hover {
+  background-color: #40a9ff;
+}
+
+.bellIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.messageItem {
+  margin-bottom: 10px;
+  padding: 10px;
+  border-radius: 5px;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.myMessage {
+  background-color: #d1e7dd;
+  margin-left: auto;
+  text-align: right;
+}
+
+.otherMessage {
+  background-color: #f8d7da;
+  margin-right: auto;
+  text-align: left;
+}
+
+.sender {
+  font-weight: bold;
+}
+
+.timestamp {
+  font-size: 0.8em;
+  color: #6c757d;
+}
+
+.message {
+  margin-top: 5px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.input {
+  padding: 10px;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  width: 100%; /* 确保输入框占满容器宽度 */
+}
+
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-right: 10px; /* 添加右边距 */
+}
+
+.button:hover {
+  background-color: #0056b3;
+}
+
+.imageForm {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.imageForm .input {
+  margin-bottom: 10px; /* 添加输入框之间的间距 */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 0 auto;
+}
+
+/* 优化加载状态容器 */
+.loadingWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 64px);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  border-radius: 10px;
+  margin: 84px 20px 20px; /* 顶部边距增加 */
+}
+
+/* 适配 Ant Design 的滚动条样式 */
+.messagesList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.messagesList::-webkit-scrollbar-track {
+  background: #f0f2f5;
+  border-radius: 3px;
+}
+
+.messagesList::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 3px;
+}
+
+.messagesList::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+/* 消息内容中的 Markdown 样式 */
+.message img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin: 5px 0;
+}
+
+.message p {
+  margin: 0 0 8px;
+}
+
+.message h1, .message h2, .message h3 {
+  margin-top: 16px;
+  margin-bottom: 8px;
+}
+
+.message code {
+  background-color: #f1f1f1;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: monospace;
+}
+
+/* Markdown 编辑器相关样式 */
+.markdownEditorContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  background-color: white;
+  overflow: hidden;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.markdownToolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  padding: 8px;
+  background-color: #f5f5f5;
+  border-bottom: 1px solid #e2e8f0;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.markdownButton {
+  margin-right: 4px !important;
+  font-size: 12px !important;
+}
+
+.markdownButton.active {
+  background-color: #1890ff !important;
+  color: white !important;
+}
+
+/* 文本区域样式 */
+.textarea {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  border: none;
+  resize: vertical;
+  font-family: inherit;
+  box-sizing: border-box;
+}
+
+.textarea:focus {
+  outline: none;
+}
+
+/* Markdown预览区域 */
+.markdownPreview {
+  width: 100%;
+  min-height: 80px;
+  padding: 10px;
+  background-color: white;
+  overflow-y: auto;
+  box-sizing: border-box;
+}

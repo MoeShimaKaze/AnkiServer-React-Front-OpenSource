@@ -1,0 +1,383 @@
+/* CreateQuestion.module.css */
+
+/* 保持基本容器和表单样式不变 */
+.formContainer {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 2rem;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.imagePreviewContainer {
+    margin-top: 10px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+}
+
+.imagePreview {
+    max-width: 100%;
+    max-height: 300px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+.imageControls {
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    margin-top: 8px;
+}
+
+.reCropButton, .removeImageButton {
+    padding: 6px 12px;
+    border-radius: 4px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: white;
+    transition: all 0.3s;
+}
+
+.reCropButton {
+    color: #1890ff;
+    border-color: #1890ff;
+}
+
+.reCropButton:hover {
+    background-color: #e6f7ff;
+}
+
+.removeImageButton {
+    color: #ff4d4f;
+    border-color: #ff4d4f;
+}
+
+.removeImageButton:hover {
+    background-color: #fff1f0;
+}
+
+.formHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #eaeaea;
+}
+
+.title {
+    color: #0056b3;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+/* 表单布局样式 */
+.form {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.5rem;
+    width: 100%;
+}
+
+.formGroup {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* 标签和输入框基础样式 */
+.label {
+    display: flex;
+    align-items: center;
+    color: #495057;
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+}
+
+.required {
+    color: #dc3545;
+    margin-left: 0.25rem;
+}
+
+/* 统一输入控件样式 */
+.input,
+.select,
+.textarea,
+.titleInput {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: white;
+    font-size: 1rem;
+    line-height: 1.5;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus,
+.titleInput:focus {
+    outline: none;
+    border-color: #3182ce;
+    box-shadow: 0 0 0 3px rgba(49, 130, 206, 0.1);
+}
+
+/* Markdown编辑器相关样式 */
+.markdownEditorContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: white;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+.markdownToolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding: 0.75rem;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e2e8f0;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.markdownButton {
+    padding: 0.5rem 1rem;
+    background-color: white;
+    border: 1px solid #e2e8f0;
+    border-radius: 4px;
+    color: #4a5568;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.markdownButton:hover {
+    background-color: #edf2f7;
+    transform: translateY(-1px);
+}
+
+.markdownButton.active {
+    background-color: #3182ce;
+    color: white;
+    border-color: #2c5282;
+}
+
+/* 文本区域样式 */
+.textarea {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    border: none;
+    resize: vertical;
+    font-family: inherit;
+    box-sizing: border-box;
+}
+
+.textarea:focus {
+    outline: none;
+}
+
+/* Markdown预览区域 */
+.markdownPreview {
+    width: 100%;
+    min-height: 200px;
+    padding: 1rem;
+    background-color: white;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
+
+/* 文件上传相关样式 */
+.fileUploadContainer {
+    width: 100%;
+    margin-top: 0.5rem;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.fileInputContainer {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+    margin-bottom: 1rem;
+    box-sizing: border-box;
+}
+
+.fileInputLabel {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.75rem 1.5rem;
+    background-color: #3182ce;
+    color: white;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    min-width: 120px;
+    white-space: nowrap;
+}
+
+.fileInputLabel:hover {
+    background-color: #2c5282;
+    transform: translateY(-1px);
+}
+
+.fileInput {
+    display: none;
+}
+
+.selectedFileName {
+    flex: 1;
+    color: #4a5568;
+    font-size: 0.875rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    padding: 0.5rem 0;
+}
+
+/* 图片预览相关样式 */
+.imagePreviewWrapper {
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.imagePreviewContainer {
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    background-color: white;
+    padding: 1rem;
+    margin-top: 0.5rem;
+    overflow: hidden;
+}
+
+.imagePreview {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 300px;
+    display: block;
+    margin: 0 auto;
+    border-radius: 4px;
+    object-fit: contain;
+}
+
+/* 底部按钮样式 */
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 2rem;
+    gap: 1rem;
+}
+
+.button {
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    min-width: 120px;
+    border: none;
+}
+
+.cancelButton {
+    background-color: #718096;
+    color: white;
+}
+
+.cancelButton:hover {
+    background-color: #4a5568;
+    transform: translateY(-1px);
+}
+
+.submitButton {
+    background-color: #3182ce;
+    color: white;
+}
+
+.submitButton:hover {
+    background-color: #2c5282;
+    transform: translateY(-1px);
+}
+
+.submitButton:disabled {
+    background-color: #a0aec0;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* 其他辅助样式 */
+.hint {
+    font-size: 0.75rem;
+    color: #718096;
+    margin-left: 0.5rem;
+}
+
+.optional {
+    color: #718096;
+    font-size: 0.875rem;
+    margin-left: 0.5rem;
+    font-weight: normal;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .formContainer {
+        margin: 1rem;
+        padding: 1.5rem;
+    }
+
+    .buttonContainer {
+        flex-direction: column;
+    }
+
+    .button {
+        width: 100%;
+    }
+
+    .fileInputContainer {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .fileInputLabel {
+        width: 100%;
+        text-align: center;
+    }
+
+    .selectedFileName {
+        text-align: center;
+        padding: 0.5rem;
+    }
+
+    .markdownToolbar {
+        padding: 0.5rem;
+        gap: 0.25rem;
+    }
+
+    .markdownButton {
+        padding: 0.375rem 0.75rem;
+        font-size: 0.75rem;
+    }
+}

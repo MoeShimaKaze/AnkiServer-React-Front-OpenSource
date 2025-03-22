@@ -1,0 +1,333 @@
+/* AdminInterventionForm.module.css */
+.pageContainer {
+  min-height: 100vh;
+  position: relative;
+  padding-top: 60px;
+}
+
+.loadingContainer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+}
+
+.submittingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 15px;
+  z-index: 1000;
+}
+
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url('../../img/background_26.jpg');
+  background-size: cover;
+  background-position: center;
+  transition: filter 0.3s ease-out;
+  z-index: -1;
+}
+
+.blur {
+  filter: blur(8px);
+}
+
+.formWrapper {
+  position: relative;
+  width: 90%;
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 30px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.formHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.title {
+  color: #0056b3;
+  margin: 0;
+  font-size: 24px;
+}
+
+.returnButton {
+  padding: 8px 16px;
+  background-color: #6c757d;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.returnButton:hover:not(:disabled) {
+  background-color: #5a6268;
+}
+
+.errorContainer,
+.success,
+.error {
+  text-align: center;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.submitButton:disabled,
+.refundButton:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* 按钮基础样式 */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #007bff;
+  color: white;
+  min-width: 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* 按钮悬停效果 */
+.button:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 按钮点击效果 */
+.button:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* 禁用状态样式 */
+.button:disabled {
+  background-color: #e9ecef;
+  color: #6c757d;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+/* 按钮加载状态 */
+.button.loading {
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* 适配移动设备 */
+@media (max-width: 768px) {
+  .button {
+    padding: 8px 16px;
+    font-size: 13px;
+    min-width: 80px;
+  }
+}
+
+.errorContainer {
+  background: rgba(255, 255, 255, 0.95);
+  margin: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.success {
+  background-color: #e6ffe6;
+  color: #28a745;
+  font-weight: 500;
+}
+
+.error {
+  background-color: #ffe6e6;
+  color: #dc3545;
+  font-weight: 500;
+}
+
+.redirectMessage {
+  margin-top: 10px;
+  color: #6c757d;
+  font-size: 14px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.checkboxGroup {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label {
+  color: #495057;
+  font-weight: 500;
+  font-size: 16px;
+}
+
+.input,
+.select {
+  padding: 12px;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus,
+.select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
+  outline: none;
+}
+
+.input:disabled,
+.select:disabled {
+  background-color: #e9ecef;
+  cursor: not-allowed;
+}
+
+.checkbox {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+}
+
+.checkbox:disabled {
+  cursor: not-allowed;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.submitButton,
+.refundButton {
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submitButton {
+  background-color: #007bff;
+  color: white;
+  flex: 1;
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #0056b3;
+  transform: translateY(-1px);
+}
+
+.refundButton {
+  background-color: #dc3545;
+  color: white;
+}
+
+.refundButton:hover:not(:disabled) {
+  background-color: #c82333;
+  transform: translateY(-1px);
+}
+
+@media (max-width: 768px) {
+  .formWrapper {
+    width: 95%;
+    padding: 20px;
+    margin: 10px auto;
+  }
+
+  .title {
+    font-size: 20px;
+  }
+
+  .input,
+  .select {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .label {
+    font-size: 14px;
+  }
+
+  .buttonGroup {
+    flex-direction: column;
+  }
+
+  .submitButton,
+  .refundButton {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .formWrapper {
+    width: 100%;
+    padding: 15px;
+    margin: 5px;
+    border-radius: 10px;
+  }
+
+  .formHeader {
+    margin-bottom: 20px;
+  }
+
+  .checkbox {
+    width: 16px;
+    height: 16px;
+  }
+}

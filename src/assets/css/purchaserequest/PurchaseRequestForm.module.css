@@ -1,0 +1,228 @@
+/* src/assets/css/purchaserequest/PurchaseRequestForm.module.css */
+
+/* 页面容器样式 */
+.pageContainer {
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+/* 内容包装器样式 */
+.contentWrapper {
+    padding: 80px 20px 20px 20px;
+    box-sizing: border-box;
+    min-height: 100vh;
+    border-radius: 16px !important;
+    overflow: hidden;
+    transition: border-radius 0.3s ease !important;
+}
+
+/* 状态检查样式 */
+.formStatusCheck {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #f9f9f9;
+    border-radius: 5px;
+}
+
+.checkComplete {
+    color: #52c41a;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.checkIncomplete {
+    color: #faad14;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+
+.errorAlert {
+    margin-bottom: 20px;
+}
+
+/* 覆盖按钮样式 */
+.submitButton[disabled] {
+    opacity: 1;
+    cursor: not-allowed;
+}
+
+/* 背景图片样式 */
+.pageContainer::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('../../img/background_49.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    filter: blur(5px);
+    z-index: -1;
+    transform: scale(1.02);
+    will-change: transform;
+}
+
+/* 背景遮罩层 */
+.pageContainer::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(245, 245, 245, 0.5);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.formContainer {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.formCard {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-radius: 8px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.95);
+}
+
+.cardTitle {
+    display: flex;
+    align-items: center;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.titleIcon {
+    margin-right: 8px;
+    font-size: 20px;
+    color: #1890ff;
+}
+
+.formSection {
+    margin-bottom: 24px;
+}
+
+.sectionTitle {
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 16px;
+    color: #333;
+    position: relative;
+    padding-left: 12px;
+    border-left: 3px solid #1890ff;
+}
+
+.uploadContainer {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.previewContainer {
+    width: 150px;
+    height: 150px;
+    overflow: hidden;
+    border-radius: 4px;
+    border: 1px solid #e8e8e8;
+}
+
+.previewImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.mapContainer {
+    margin-top: 16px;
+    border: 1px solid #e8e8e8;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.formFooter {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.cancelButton {
+    min-width: 100px;
+}
+
+.submitButton {
+    min-width: 100px;
+}
+
+.notice {
+    margin-top: 24px;
+    padding: 16px;
+    background-color: rgba(249, 249, 249, 0.9);
+    border-radius: 4px;
+    border-left: 4px solid #faad14;
+}
+
+.noticeHeader {
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #faad14;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.noticeList {
+    padding-left: 20px;
+    margin: 0;
+}
+
+.noticeList li {
+    margin-bottom: 6px;
+    color: #666;
+}
+
+.noticeList li:last-child {
+    margin-bottom: 0;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+    .formContainer {
+        padding: 12px;
+    }
+
+    .uploadContainer {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .previewContainer {
+        margin-top: 12px;
+    }
+}
+
+/* 性能优化 */
+@media (prefers-reduced-motion: no-preference) {
+    .pageContainer::before {
+        transition: transform 0.3s ease-out;
+    }
+}
+
+/* 渐入动画 */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
